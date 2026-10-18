@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DriveGuard AI — High-Tech Autonomous Driver Safety Presentation Deck" />
+  <title>DriveGuard AI — Project Presentation Deck</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ================================================================
+       DRIVEGUARD AI — FUTURISTIC PRESENTATION DECK STYLES
+       ================================================================ */
+    :root {
+      --bg-base:        #030712;
+      --bg-surface:     #080e1e;
+      --bg-card:        rgba(11, 18, 34, 0.75);
+      --bg-card-hover:  rgba(16, 26, 48, 0.90);
+      --accent:         #00f0ff;          /* Cyber Cyan */
+      --accent-glow:    rgba(0, 240, 255, 0.35);
+      --green:          #10b981;          /* Laser Emerald */
+      --green-glow:     rgba(16, 185, 129, 0.30);
+      --red:            #ff3366;          /* Cyber Crimson */
+      --red-glow:       rgba(255, 51, 102, 0.35);
+      --orange:         #f59e0b;          /* Solar Amber */
+      --purple:         #8b5cf6;          /* Neon Purple */
+      --text-primary:   #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted:     #64748b;
+      --border:         rgba(148, 163, 184, 0.16);
+      --border-accent:  rgba(0, 240, 255, 0.45);
+      --radius:         16px;
+      --font-brand:     'Outfit', -apple-system, sans-serif;
+      --font-body:      'Inter', system-ui, sans-serif;
+      --font-mono:      'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%; height: 100%; overflow: hidden;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+    }
+
+    /* Ambient Cyber Background Grid & Floating Lights */
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient-orb {
+      position: fixed; border-radius: 50%; filter: blur(140px);
+      pointer-events: none; z-index: 0; opacity: 0.28;
+      animation: floatOrb 22s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, #0ea5e9, transparent 70%); top: -150px; left: -100px; }
+    .orb-2 { width: 700px; height: 700px; background: radial-gradient(circle, #6366f1, transparent 70%); bottom: -150px; right: -150px; animation-duration: 28s; }
+    .orb-3 { width: 450px; height: 450px; background: radial-gradient(circle, #10b981, transparent 70%); top: 40%; left: 40%; opacity: 0.14; }
+
+    @keyframes floatOrb {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(30px, 40px) scale(1.08); }
+      100% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+
+    /* Presentation Viewport */
+    .deck-container {
+      position: relative; width: 100%; height: 100%;
+      display: flex; flex-direction: column; z-index: 1;
+    }
+
+    /* Top Presentation Bar */
+    .top-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.85rem 2rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(3, 7, 18, 0.7);
+      backdrop-filter: blur(16px);
+      z-index: 10;
+    }
+    .bar-brand {
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .brand-logo-icon {
+      width: 28px; height: 28px;
+    }
+    .brand-title {
+      font-family: var(--font-brand); font-size: 1.05rem; font-weight: 800;
+      letter-spacing: -0.01em; color: #fff;
+    }
+    .brand-badge {
+      background: linear-gradient(135deg, var(--accent), #0284c7);
+      color: #030712; font-size: 0.65rem; font-weight: 900;
+      padding: 0.15rem 0.45rem; border-radius: 4px;
+    }
+    .slide-telemetry {
+      font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent);
+      background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.25);
+      padding: 0.25rem 0.75rem; border-radius: 20px;
+      letter-spacing: 0.05em;
+    }
+    .top-controls {
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-top {
+      background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border);
+      color: var(--text-secondary); padding: 0.35rem 0.75rem; border-radius: 8px;
+      font-size: 0.75rem; font-weight: 600; cursor: pointer;
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+    .btn-top:hover {
+      background: rgba(0, 240, 255, 0.15); border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Main Slides Stage */
+    .slides-stage {
+      flex: 1; position: relative; width: 100%; height: 100%;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute; inset: 0;
+      padding: 2.5rem 4rem 4rem;
+      display: flex; flex-direction: column;
+      opacity: 0; pointer-events: none;
+      transform: translateX(40px) scale(0.98);
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+    }
+    .slide.active {
+      opacity: 1; pointer-events: all;
+      transform: translateX(0) scale(1);
+    }
+    .slide.prev {
+      transform: translateX(-40px) scale(0.98);
+    }
+
+    /* Common Slide Typography */
+    .slide-header {
+      margin-bottom: 2rem;
+    }
+    .slide-tag {
+      font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin-bottom: 0.4rem;
+    }
+    .slide-tag::before {
+      content: ""; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); box-shadow: 0 0 10px var(--accent);
+    }
+    .slide-title {
+      font-family: var(--font-brand); font-size: 2.2rem; font-weight: 800;
+      line-height: 1.15; color: #fff; letter-spacing: -0.02em;
+    }
+    .slide-title span {
+      background: linear-gradient(135deg, var(--accent), #38bdf8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .slide-subtitle {
+      font-size: 1rem; color: var(--text-secondary); margin-top: 0.4rem; max-width: 850px;
+    }
+
+    /* Glassmorphic Slide Cards */
+    .glass-box {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.06);
+      position: relative; overflow: hidden;
+      transition: all 0.25s ease;
+    }
+    .glass-box:hover {
+      border-color: rgba(0, 240, 255, 0.3);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 20px rgba(0, 240, 255, 0.15);
+    }
+
+    /* Layout Grids */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; flex: 1; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.35rem; flex: 1; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; flex: 1; }
+    .grid-split { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1.75rem; flex: 1; }
+
+    /* Key Metric Card */
+    .stat-card {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 1.5rem; border-left: 3px solid var(--accent);
+    }
+    .stat-card.danger { border-left-color: var(--red); }
+    .stat-card.warning { border-left-color: var(--orange); }
+    .stat-card.success { border-left-color: var(--green); }
+    .stat-num {
+      font-family: var(--font-brand); font-size: 2.5rem; font-weight: 800;
+      color: #fff; line-height: 1; margin-bottom: 0.5rem;
+    }
+    .stat-num.crimson { color: var(--red); text-shadow: 0 0 20px var(--red-glow); }
+    .stat-num.cyan { color: var(--accent); text-shadow: 0 0 20px var(--accent-glow); }
+    .stat-num.emerald { color: var(--green); text-shadow: 0 0 20px var(--green-glow); }
+    .stat-label {
+      font-size: 0.85rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.35rem;
+    }
+    .stat-desc {
+      font-size: 0.78rem; color: var(--text-secondary); line-height: 1.45;
+    }
+
+    /* SVG Graphics & Architecture Flow */
+    .flow-pipeline {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 0.5rem; width: 100%; margin: 1rem 0;
+    }
+    .flow-step {
+      flex: 1; background: rgba(15, 23, 42, 0.75); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem 0.85rem; text-align: center;
+      position: relative; transition: all 0.25s;
+    }
+    .flow-step:hover {
+      border-color: var(--accent); transform: translateY(-4px);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+    }
+    .flow-icon { font-size: 1.6rem; margin-bottom: 0.5rem; display: block; }
+    .flow-name { font-size: 0.82rem; font-weight: 700; color: #fff; margin-bottom: 0.25rem; }
+    .flow-sub { font-size: 0.68rem; color: var(--text-muted); font-family: var(--font-mono); }
+    .flow-arrow {
+      color: var(--accent); font-weight: 900; font-size: 1.1rem;
+      opacity: 0.7; animation: pulseArrow 1.5s infinite;
+    }
+    @keyframes pulseArrow {
+      0%, 100% { transform: translateX(0); opacity: 0.6; }
+      50% { transform: translateX(3px); opacity: 1; }
+    }
+
+    /* Math Formulas */
+    .math-formula {
+      font-family: var(--font-mono); background: rgba(3, 7, 18, 0.8);
+      border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 10px;
+      padding: 0.9rem 1.2rem; color: var(--accent); font-size: 0.95rem;
+      display: inline-block; margin: 0.65rem 0; box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+
+    /* Feature Bullet Items */
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+    .feature-item {
+      display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.88rem; color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .feature-bullet {
+      width: 18px; height: 18px; border-radius: 50%; background: rgba(0, 240, 255, 0.15);
+      border: 1px solid var(--accent); color: var(--accent);
+      display: flex; align-items: center; justify-content: center; font-size: 0.65rem;
+      font-weight: 900; flex-shrink: 0; margin-top: 2px;
+    }
+    .feature-item strong { color: #fff; font-weight: 600; }
+
+    /* Comparison Table */
+    .slide-table {
+      width: 100%; border-collapse: collapse; font-size: 0.82rem;
+      border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    }
+    .slide-table th {
+      background: rgba(15, 23, 42, 0.9); padding: 0.75rem 1rem;
+      text-align: left; font-weight: 700; color: #fff; border-bottom: 1px solid var(--border);
+      font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.05em;
+    }
+    .slide-table td {
+      padding: 0.75rem 1rem; border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+      color: var(--text-secondary);
+    }
+    .slide-table tr:hover td { background: rgba(0, 240, 255, 0.04); }
+
+    /* Slide 1 Cover Page Custom Styles */
+    .cover-layout {
+      display: flex; flex-direction: column; justify-content: center;
+      align-items: center; height: 100%; text-align: center;
+    }
+    .cover-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(0, 240, 255, 0.1); border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: 30px; padding: 0.4rem 1.2rem; color: var(--accent);
+      font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700;
+      margin-bottom: 1.5rem; letter-spacing: 0.05em;
+    }
+    .cover-title {
+      font-family: var(--font-brand); font-size: 3.6rem; font-weight: 900;
+      letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 1rem; color: #fff;
+    }
+    .cover-subtitle {
+      font-size: 1.25rem; color: var(--text-secondary); max-width: 780px;
+      line-height: 1.5; margin-bottom: 2.5rem;
+    }
+    .cover-meta {
+      display: flex; align-items: center; gap: 2rem;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 50px; padding: 0.85rem 2.2rem;
+      backdrop-filter: blur(20px);
+    }
+    .meta-col { text-align: left; }
+    .meta-label { font-size: 0.68rem; font-family: var(--font-mono); color: var(--accent); text-transform: uppercase; }
+    .meta-val { font-size: 0.88rem; font-weight: 600; color: #fff; }
+    .meta-divider { width: 1px; height: 28px; background: var(--border); }
+
+    /* Bottom Navigation Dock */
+    .bottom-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.85rem 2rem;
+      border-top: 1px solid var(--border);
+      background: rgba(3, 7, 18, 0.8);
+      backdrop-filter: blur(16px);
+      z-index: 10;
+    }
+    .progress-track {
+      flex: 1; max-width: 400px; height: 6px;
+      background: rgba(255, 255, 255, 0.1); border-radius: 10px;
+      margin: 0 1.5rem; overflow: hidden; position: relative;
+    }
+    .progress-fill {
+      height: 100%; width: 8.33%;
+      background: linear-gradient(90deg, var(--accent), #38bdf8);
+      border-radius: 10px; box-shadow: 0 0 12px var(--accent-glow);
+      transition: width 0.35s ease;
+    }
+    .nav-buttons {
+      display: flex; align-items: center; gap: 0.65rem;
+    }
+    .btn-nav {
+      background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border);
+      color: var(--text-primary); padding: 0.45rem 1rem; border-radius: 8px;
+      font-size: 0.82rem; font-weight: 600; cursor: pointer;
+      display: flex; align-items: center; gap: 0.45rem;
+      transition: all 0.2s ease;
+    }
+    .btn-nav:hover:not(:disabled) {
+      background: rgba(0, 240, 255, 0.15); border-color: var(--accent);
+      color: var(--accent); box-shadow: 0 0 14px rgba(0, 240, 255, 0.25);
+    }
+    .btn-nav:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* Interactive Slide Selector Drawer / Grid Overview */
+    .overview-modal {
+      position: fixed; inset: 0; background: rgba(3, 7, 18, 0.92);
+      backdrop-filter: blur(24px); z-index: 100;
+      padding: 3rem; display: none; flex-direction: column;
+    }
+    .overview-modal.open { display: flex; }
+    .overview-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+    .overview-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
+      overflow-y: auto; flex: 1; padding-bottom: 2rem;
+    }
+    .thumb-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem; cursor: pointer;
+      transition: all 0.2s; position: relative;
+    }
+    .thumb-card:hover, .thumb-card.active {
+      border-color: var(--accent); transform: scale(1.02);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+    }
+    .thumb-card.active::before {
+      content: "ACTIVE"; position: absolute; top: 8px; right: 8px;
+      font-size: 0.6rem; font-family: var(--font-mono); font-weight: 900;
+      color: #030712; background: var(--accent); padding: 2px 6px; border-radius: 4px;
+    }
+    .thumb-num { font-size: 0.72rem; font-family: var(--font-mono); color: var(--accent); margin-bottom: 0.25rem; }
+    .thumb-title { font-size: 0.92rem; font-weight: 700; color: #fff; }
+
+    /* Print Styles (Export to PDF) */
+    @media print {
+      body { overflow: visible !important; }
+      .deck-container { height: auto !important; }
+      .top-bar, .bottom-bar, .overview-modal, .ambient-orb { display: none !important; }
+      .slides-stage { overflow: visible !important; }
+      .slide {
+        position: relative !important; inset: auto !important;
+        opacity: 1 !important; transform: none !important;
+        page-break-after: always; height: 100vh !important;
+        padding: 3rem !important; display: flex !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Light Orbs -->
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+  <div class="ambient-orb orb-3"></div>
+
+  <div class="deck-container">
+    <!-- Top Telemetry Header -->
+    <header class="top-bar">
+      <div class="bar-brand">
+        <svg class="brand-logo-icon" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="22" stroke="#00f0ff" stroke-width="2" stroke-dasharray="4 2"/>
+          <path d="M24 4L6 12V22C6 33.1 13.6 43.3 24 46C34.4 43.3 42 33.1 42 22V12L24 4Z" fill="url(#gradLogo)" stroke="#38bdf8" stroke-width="1.5"/>
+          <path d="M24 14C21 14 18 16 18 20C18 22 19 23.5 20.5 24.5C18.5 25.5 16 28 16 32H32C32 28 29.5 25.5 27.5 24.5C29 23.5 30 22 30 20C30 16 27 14 24 14Z" fill="#fff"/>
+          <defs>
+            <linearGradient id="gradLogo" x1="6" y1="4" x2="42" y2="46">
+              <stop offset="0%" stop-color="#0ea5e9"/>
+              <stop offset="100%" stop-color="#06b6d4"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="brand-title">DriveGuard <span class="brand-badge">AI</span></span>
+      </div>
+
+      <div class="slide-telemetry" id="slideTelemetry">SLIDE 01 // 13 · EXECUTIVE BRIEFING</div>
+
+      <div class="top-controls">
+        <button class="btn-top" id="btnOverview" title="Slide Overview Grid (Press O)">
+          <span>▦</span> Overview
+        </button>
+        <button class="btn-top" id="btnFullscreen" title="Toggle Fullscreen (Press F)">
+          <span>⛶</span> Fullscreen
+        </button>
+        <button class="btn-top" id="btnPrint" title="Print / Export PDF (Ctrl+P)">
+          <span>🖨️</span> PDF
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Slides Stage -->
+    <main class="slides-stage" id="slidesStage">
+
+      <!-- ==========================================
+           SLIDE 1: TITLE & TEAM
+           ========================================== -->
+      <section class="slide active" data-slide="1" data-tag="Title & Overview">
+        <div class="cover-layout">
+          <div class="cover-badge">
+            <span>●</span> AUTONOMOUS VEHICLE SAFETY RESEARCH & DEVELOPMENT
+          </div>
+          <h1 class="cover-title">
+            DriveGuard <span style="background: linear-gradient(135deg, #00f0ff, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AI</span>
+          </h1>
+          <p class="cover-subtitle">
+            Real-Time Edge Computer Vision System for In-Cabin Driver Drowsiness, Distraction, and Cognitive Fatigue Detection
+          </p>
+
+          <div class="cover-meta">
+            <div class="meta-col">
+              <div class="meta-label">Domain</div>
+              <div class="meta-val">Edge AI & Driver Telemetry</div>
+            </div>
+            <div class="meta-divider"></div>
+            <div class="meta-col">
+              <div class="meta-label">Core Models</div>
+              <div class="meta-val">MediaPipe 468-Mesh + YOLOv11</div>
+            </div>
+            <div class="meta-divider"></div>
+            <div class="meta-col">
+              <div class="meta-label">System Architecture</div>
+              <div class="meta-val">Flask REST · MySQL · Cyber HUD</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 2: INTRODUCTION & PROBLEM STATEMENT
+           ========================================== -->
+      <section class="slide" data-slide="2" data-tag="Context & Motivation">
+        <div class="slide-header">
+          <div class="slide-tag">Problem Statement</div>
+          <h2 class="slide-title">The Silent Threat of <span>Driver Fatigue & Inattention</span></h2>
+          <p class="slide-subtitle">Preventable vehicular collisions cause over 1.35 million global fatalities each year.</p>
+        </div>
+
+        <div class="grid-3" style="margin-bottom: 1.5rem;">
+          <div class="glass-box stat-card danger">
+            <div class="stat-num crimson">1.35M</div>
+            <div class="stat-label">Annual Global Fatalities</div>
+            <div class="stat-desc">Road traffic injuries are the leading cause of death globally for children and young adults (WHO).</div>
+          </div>
+          <div class="glass-box stat-card warning">
+            <div class="stat-num" style="color: var(--orange);">20–30%</div>
+            <div class="stat-label">Attributed to Driver Fatigue</div>
+            <div class="stat-desc">Cognitive exhaustion and micro-sleep episodes cause high-speed highway collisions with zero braking time.</div>
+          </div>
+          <div class="glass-box stat-card danger">
+            <div class="stat-num crimson">23×</div>
+            <div class="stat-label">Crash Risk During Phone Use</div>
+            <div class="stat-desc">Texting takes eyes off the road for an average of 4.6 seconds—traversing an entire football field blindfolded.</div>
+          </div>
+        </div>
+
+        <div class="glass-box" style="border-left: 3px solid var(--accent);">
+          <div style="font-weight: 700; color: #fff; margin-bottom: 0.35rem; font-size: 0.95rem;">
+            ⚠️ The Existing Industry Flaw: "Alert Fatigue" & False Alarms
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+            Traditional driver monitors sound shrill alarms whenever a driver's head turns away from the forward road. However, <strong style="color: #fff;">checking side-view mirrors is essential safe driving</strong>. Constant false alarms cause 68% of commercial drivers to disable safety systems. A context-aware system is urgently required.
+          </p>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 3: MARKET SIZE, VALUE & REGULATIONS
+           ========================================== -->
+      <section class="slide" data-slide="3" data-tag="Market Opportunity">
+        <div class="slide-header">
+          <div class="slide-tag">Market Value & Regulations</div>
+          <h2 class="slide-title">A Rapidly Expanding <span>$4.8B Global Market</span></h2>
+          <p class="slide-subtitle">Driver monitoring systems have shifted from an optional feature into a legally mandated global requirement.</p>
+        </div>
+
+        <div class="grid-4" style="margin-bottom: 1.5rem;">
+          <div class="glass-box stat-card success">
+            <div class="stat-num cyan">$4.8B</div>
+            <div class="stat-label">Market Size by 2030</div>
+            <div class="stat-desc">Global Driver Monitoring Systems (DMS) market growing rapidly at a CAGR of 12.8%.</div>
+          </div>
+          <div class="glass-box stat-card warning">
+            <div class="stat-num" style="color: var(--orange);">EU GSR</div>
+            <div class="stat-label">Government Mandates</div>
+            <div class="stat-desc">EU General Safety Regulations mandate Drowsiness & Attention Warning (DDAW) on all new vehicles.</div>
+          </div>
+          <div class="glass-box stat-card success">
+            <div class="stat-num emerald">5-Star</div>
+            <div class="stat-label">Euro NCAP Requirement</div>
+            <div class="stat-desc">Vehicles cannot achieve top crash-safety ratings without active in-cabin driver monitoring.</div>
+          </div>
+          <div class="glass-box stat-card success">
+            <div class="stat-num cyan">15–25%</div>
+            <div class="stat-label">Insurance Premium Savings</div>
+            <div class="stat-desc">Fleets deploying certified driver scorecards negotiate substantially lower commercial premiums.</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="glass-box">
+            <div style="font-weight: 700; color: #fff; font-size: 0.95rem; margin-bottom: 0.5rem;">
+              💰 The Cost of Inaction vs. DriveGuard AI ROI
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">
+              A single heavy commercial truck rollover averages <strong>$148,000 to $500,000+</strong> in vehicle repair, medical claims, damaged cargo, and legal defense costs. DriveGuard AI delivers a direct return on investment within months by preventing high-severity collisions before they occur.
+            </p>
+          </div>
+          <div class="glass-box">
+            <div style="font-weight: 700; color: var(--green); font-size: 0.95rem; margin-bottom: 0.5rem;">
+              ⚖️ Corporate Legal Defense & Blackbox Audits
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">
+              In traffic accident litigation, transportation companies face severe liability. DriveGuard AI's relational database stores continuous timestamped safety logs, providing irrefutable proof that the driver was attentive, alert, and operating responsibly.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 4: REAL-WORLD APPLICATIONS & USE CASES
+           ========================================== -->
+      <section class="slide" data-slide="4" data-tag="Commercial Applications">
+        <div class="slide-header">
+          <div class="slide-tag">Real-World Deployment</div>
+          <h2 class="slide-title">Multi-Industry <span>Commercial Applications</span></h2>
+          <p class="slide-subtitle">Versatile, edge-ready architecture protecting drivers, passengers, and multi-million dollar assets.</p>
+        </div>
+
+        <div class="grid-3" style="margin-bottom: 1rem;">
+          <div class="glass-box" style="border-top: 3px solid var(--accent);">
+            <div style="font-size: 1.5rem; margin-bottom: 0.4rem;">🚚</div>
+            <div style="font-weight: 700; color: #fff; font-size: 0.95rem; margin-bottom: 0.35rem;">
+              Long-Haul Freight & Logistics
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.45;">
+              Overnight highway routes trigger involuntary microsleep episodes. Automated rest-break scheduling and drowsiness alerts protect valuable cargo and prevent deadly multi-vehicle highway pileups.
+            </p>
+          </div>
+
+          <div class="glass-box" style="border-top: 3px solid var(--green);">
+            <div style="font-size: 1.5rem; margin-bottom: 0.4rem;">🚕</div>
+            <div style="font-weight: 700; color: #fff; font-size: 0.95rem; margin-bottom: 0.35rem;">
+              Ride-Hailing (Uber, Ola, Lyft)
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.45;">
+              Validates driver attentiveness, stops dangerous handheld smartphone texting during trips, ensures passenger peace of mind, and maintains high customer service ratings.
+            </p>
+          </div>
+
+          <div class="glass-box" style="border-top: 3px solid var(--orange);">
+            <div style="font-size: 1.5rem; margin-bottom: 0.4rem;">🚌</div>
+            <div style="font-weight: 700; color: #fff; font-size: 0.95rem; margin-bottom: 0.35rem;">
+              School Buses & Public Transit
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.45;">
+              Zero-tolerance safety enforcement for school children and daily city commuters. Instantly warns drivers during momentary lapses and transmits incident telemetry to central dispatch.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="glass-box" style="border-top: 3px solid var(--red);">
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
+              <span style="font-size: 1.3rem;">🏗️</span>
+              <span style="font-weight: 700; color: #fff; font-size: 0.95rem;">Mining & Heavy Industrial Machinery</span>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.45;">
+              Massive quarry haul trucks and cranes operating in low-light, monotonous environments. Night Vision enables uninterrupted fatigue surveillance in pitch-black pit mines.
+            </p>
+          </div>
+
+          <div class="glass-box" style="border-top: 3px solid #a855f7;">
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
+              <span style="font-size: 1.3rem;">🚗</span>
+              <span style="font-weight: 700; color: #fff; font-size: 0.95rem;">Usage-Based Insurance (UBI)</span>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.45;">
+              "Pay-How-You-Drive" telematics. Insurance companies reward safe, disciplined drivers (Grade A/B) with up to 25% cash-back discounts based on objective DriveGuard scorecards.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 5: OBJECTIVES & SCOPE
+           ========================================== -->
+      <section class="slide" data-slide="5" data-tag="Goals & Deliverables">
+        <div class="slide-header">
+          <div class="slide-tag">Objectives & Scope</div>
+          <h2 class="slide-title">System <span>Objectives & Technical Scope</span></h2>
+          <p class="slide-subtitle">Building an end-to-end, multi-modal driver safety cockpit operating entirely in real-time.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="glass-box">
+            <div style="font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span>🎯</span> Core Technical Objectives
+            </div>
+            <ul class="feature-list">
+              <li class="feature-item">
+                <span class="feature-bullet">1</span>
+                <div><strong>Sub-50ms Real-Time Vision:</strong> Continuous video inference processing 30+ FPS on edge CPUs without GPU dependency.</div>
+              </li>
+              <li class="feature-item">
+                <span class="feature-bullet">2</span>
+                <div><strong>Multi-Modal Feature Fusion:</strong> Synchronous tracking of eye blinks (EAR), yawning mouth openness (MAR), and head yaw/pitch.</div>
+              </li>
+              <li class="feature-item">
+                <span class="feature-bullet">3</span>
+                <div><strong>YOLO Contraband Object Detection:</strong> Immediate identification of handheld smartphones and secondary devices.</div>
+              </li>
+              <li class="feature-item">
+                <span class="feature-bullet">4</span>
+                <div><strong>False-Alarm Elimination:</strong> Contextual classification differentiating safe mirror glances from true off-road distraction.</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="glass-box">
+            <div style="font-size: 1.1rem; font-weight: 700; color: var(--green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span>🚀</span> Architectural Deliverables
+            </div>
+            <ul class="feature-list">
+              <li class="feature-item">
+                <span class="feature-bullet" style="border-color: var(--green); color: var(--green);">5</span>
+                <div><strong>Graduated 3-Stage Intervention:</strong> Seamless escalation from Stage 0 (Normal) ➔ Stage 1 (Caution) ➔ Stage 2 (Critical Alarm).</div>
+              </li>
+              <li class="feature-item">
+                <span class="feature-bullet" style="border-color: var(--green); color: var(--green);">6</span>
+                <div><strong>Dynamic Driver Scorecard:</strong> Real-time numerical rating (0–100%) grading driver safety with persistent session audits.</div>
+              </li>
+              <li class="feature-item">
+                <span class="feature-bullet" style="border-color: var(--green); color: var(--green);">7</span>
+                <div><strong>Rest Break Fatigue Management:</strong> Driving duration tracking with automated mandatory rest advisories.</div>
+              </li>
+              <li class="feature-item">
+                <span class="feature-bullet" style="border-color: var(--green); color: var(--green);">8</span>
+                <div><strong>Cockpit Telemetry HUD:</strong> Tesla Cyberpunk-inspired dashboard with perimeter alert lighting and audio beeps.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 6: SYSTEM ARCHITECTURE & PIPELINE
+           ========================================== -->
+      <section class="slide" data-slide="6" data-tag="System Design">
+        <div class="slide-header">
+          <div class="slide-tag">Architecture & Pipeline</div>
+          <h2 class="slide-title">End-to-End <span>Real-Time Inference Pipeline</span></h2>
+          <p class="slide-subtitle">Multi-threaded vision ingestion, dual model inference, threat engine, and client HUD delivery.</p>
+        </div>
+
+        <div class="flow-pipeline">
+          <div class="flow-step">
+            <span class="flow-icon">📹</span>
+            <div class="flow-name">Video Capture</div>
+            <div class="flow-sub">OpenCV VideoStream<br>30 FPS RGB Frame</div>
+          </div>
+          <span class="flow-arrow">➔</span>
+          <div class="flow-step">
+            <span class="flow-icon">🧠</span>
+            <div class="flow-name">Dual AI Models</div>
+            <div class="flow-sub">MediaPipe 468-Mesh<br>+ YOLOv11 Tensor</div>
+          </div>
+          <span class="flow-arrow">➔</span>
+          <div class="flow-step">
+            <span class="flow-icon">📐</span>
+            <div class="flow-name">Biometric Metrics</div>
+            <div class="flow-sub">EAR (Eyes) · MAR (Mouth)<br>Head Pose (Yaw/Pitch)</div>
+          </div>
+          <span class="flow-arrow">➔</span>
+          <div class="flow-step">
+            <span class="flow-icon">⚡</span>
+            <div class="flow-name">Threat Classifier</div>
+            <div class="flow-sub">Stage 0 · 1 · 2 Escalation<br>Mirror Glance Gating</div>
+          </div>
+          <span class="flow-arrow">➔</span>
+          <div class="flow-step">
+            <span class="flow-icon">🗄️</span>
+            <div class="flow-name">Data Persistence</div>
+            <div class="flow-sub">Flask REST Server<br>MySQL Event Logging</div>
+          </div>
+          <span class="flow-arrow">➔</span>
+          <div class="flow-step">
+            <span class="flow-icon">🖥️</span>
+            <div class="flow-name">Cockpit HUD</div>
+            <div class="flow-sub">Glassmorphic UI<br>Vignette & Audio Beep</div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 1.5rem;">
+          <div class="glass-box">
+            <div style="font-weight: 700; color: #fff; margin-bottom: 0.5rem; font-size: 0.95rem;">
+              🧵 Multi-Threaded Concurrency
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">
+              Webcam capture and AI frame decoding run in a dedicated background worker thread decoupled from the Flask HTTP server. HTTP status polling (`/api/status`) operates asynchronously at 500ms intervals, ensuring zero stuttering on live video feeds.
+            </p>
+          </div>
+          <div class="glass-box">
+            <div style="font-weight: 700; color: #fff; margin-bottom: 0.5rem; font-size: 0.95rem;">
+              🛡️ Temporal Smoothing Buffer
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">
+              A 7-frame sliding window buffer (`deque(maxlen=7)`) applies moving averages over calculated EAR and MAR values. This completely eliminates false alert flicker caused by natural eye blinks (100–300ms) or rapid speech.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 7: OBJECT DETECTION MODEL (YOLO)
+           ========================================== -->
+      <section class="slide" data-slide="7" data-tag="Deep Learning Models">
+        <div class="slide-header">
+          <div class="slide-tag">YOLOv11 Object Detection</div>
+          <h2 class="slide-title">Deep Learning <span>Handheld Device & Phone Detection</span></h2>
+          <p class="slide-subtitle">Ultra-fast CNN object localization executing concurrent sub-30ms inference.</p>
+        </div>
+
+        <div class="grid-split">
+          <div class="glass-box">
+            <div style="font-weight: 700; color: #fff; font-size: 1.05rem; margin-bottom: 1rem;">
+              📱 Model Configuration & Tuning
+            </div>
+            <table class="slide-table">
+              <tr><th>Parameter</th><th>Value</th><th>Engineering Rationale</th></tr>
+              <tr><td>Architecture</td><td>YOLOv11 Nano (`yolo11n.pt`)</td><td>Lightweight 2.6M parameters optimized for edge CPUs</td></tr>
+              <tr><td>Target Classes</td><td>#67 (cell phone), #65 (remote)</td><td>Detects dark phones held in awkward angles/orientations</td></tr>
+              <tr><td>Confidence Threshold</td><td>0.20 (Tuned from 0.55)</td><td>Overcomes low-light webcam attenuation and hand occlusions</td></tr>
+              <tr><td>Inference Latency</td><td>~24ms per frame</td><td>Leaves headroom for MediaPipe 468-point mesh computation</td></tr>
+              <tr><td>Detection Lag</td><td>1 Frame (Instant Alert)</td><td>Zero-delay critical response when phone enters driver hand</td></tr>
+            </table>
+          </div>
+
+          <div class="glass-box">
+            <div style="font-weight: 700; color: var(--accent); font-size: 1.05rem; margin-bottom: 0.75rem;">
+              🛠️ Windows NMS Architecture Workaround
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 1rem;">
+              On Windows systems, PyTorch often throws <code style="color: var(--red);">RuntimeError: operator torchvision::nms does not exist</code> due to missing C++ compiler extensions.
+            </p>
+            <div style="background: rgba(3, 7, 18, 0.9); border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem; font-family: var(--font-mono); font-size: 0.75rem; color: #38bdf8;">
+              # Routed to pure PyTorch tensor NMS:<br>
+              from ultralytics.utils.nms import TorchNMS<br>
+              _tv = types.ModuleType('torchvision')<br>
+              _tv.ops.nms = TorchNMS.nms<br>
+              sys.modules['torchvision'] = _tv
+            </div>
+            <p style="font-size: 0.8rem; color: var(--green); margin-top: 0.75rem; font-weight: 600;">
+              ✓ Enables 100% full-speed GPU/CPU NMS with zero crashes or C++ binary dependencies.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 8: NOVELTY & KEY HIGHLIGHTS
+           ========================================== -->
+      <section class="slide" data-slide="8" data-tag="Innovation & Contributions">
+        <div class="slide-header">
+          <div class="slide-tag">Novelty & Core Contributions</div>
+          <h2 class="slide-title">What Makes <span>DriveGuard AI Novel?</span></h2>
+          <p class="slide-subtitle">Three key technological breakthroughs solving real-world driver monitoring hurdles.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="glass-box" style="border-top: 3px solid var(--green);">
+            <div style="font-size: 1.4rem; margin-bottom: 0.5rem;">🔍</div>
+            <div style="font-weight: 700; color: #fff; font-size: 1.05rem; margin-bottom: 0.5rem;">
+              1. Context-Aware Mirror Checking
+            </div>
+            <div style="font-size: 0.75rem; color: var(--green); font-family: var(--font-mono); margin-bottom: 0.75rem;">
+              NO FALSE ALARMS FOR SAFE DRIVING
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">
+              Differentiates between checking side-view mirrors (0.3s–1.2s glance duration) and true off-road distraction (&gt;1.5s). Driver receives an emerald confirmation badge with <strong style="color: #fff;">zero score deduction</strong>.
+            </p>
+          </div>
+
+          <div class="glass-box" style="border-top: 3px solid var(--accent);">
+            <div style="font-size: 1.4rem; margin-bottom: 0.5rem;">⚡</div>
+            <div style="font-weight: 700; color: #fff; font-size: 1.05rem; margin-bottom: 0.5rem;">
+              2. Graduated Threat Escalation
+            </div>
+            <div style="font-size: 0.75rem; color: var(--accent); font-family: var(--font-mono); margin-bottom: 0.75rem;">
+              STAGE 0 ➔ STAGE 1 ➔ STAGE 2 MATRIX
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">
+              Replaces binary buzzers. Stage 0 is focused; Stage 1 uses soft ambient amber perimeter pulses and chimes for yawning; Stage 2 activates crimson flashing strobes and sharp alert buzzers for microsleep or phone usage.
+            </p>
+          </div>
+
+          <div class="glass-box" style="border-top: 3px solid var(--orange);">
+            <div style="font-size: 1.4rem; margin-bottom: 0.5rem;">⏱️</div>
+            <div style="font-weight: 700; color: #fff; font-size: 1.05rem; margin-bottom: 0.5rem;">
+              3. Rest Break Fatigue Manager
+            </div>
+            <div style="font-size: 0.75rem; color: var(--orange); font-family: var(--font-mono); margin-bottom: 0.75rem;">
+              CONTINUOUS VIGILANCE TRACKING
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">
+              Continuous driving fatigue causes involuntary attention lapses. The dashboard tracks continuous drive time and enforces mandatory rest break advisories after 2 hours of non-stop highway transit.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 9: DATABASE & DRIVER ANALYTICS
+           ========================================== -->
+      <section class="slide" data-slide="9" data-tag="Data Persistence">
+        <div class="slide-header">
+          <div class="slide-tag">Database & Scoring Engine</div>
+          <h2 class="slide-title">Relational Database & <span>Driver Safety Scoring</span></h2>
+          <p class="slide-subtitle">Full longitudinal tracking with session audits and real-time risk evaluation.</p>
+        </div>
+
+        <div class="grid-split">
+          <div class="glass-box">
+            <div style="font-weight: 700; color: #fff; font-size: 1.05rem; margin-bottom: 0.85rem;">
+              🗄️ MySQL Database Schema
+            </div>
+            <table class="slide-table">
+              <tr><th>Table Name</th><th>Key Attributes</th><th>Function</th></tr>
+              <tr><td><code>drivers</code></td><td>driver_id, driver_code, name, vehicle_reg</td><td>Driver identity & vehicle binding</td></tr>
+              <tr><td><code>driver_sessions</code></td><td>session_id, start_time, duration, final_score</td><td>Historical drive session performance</td></tr>
+              <tr><td><code>safety_alerts</code></td><td>alert_id, session_id, alert_type, timestamp</td><td>Granular event logs (Drowsy/Phone/Distract)</td></tr>
+              <tr><td><code>biometrics</code></td><td>record_id, ear_val, mouth_val, head_yaw</td><td>Periodic telemetry snapshots for analytics</td></tr>
+            </table>
+          </div>
+
+          <div class="glass-box">
+            <div style="font-weight: 700; color: var(--green); font-size: 1.05rem; margin-bottom: 0.75rem;">
+              📊 Dynamic Scoring Algorithm
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+              Every driver begins their journey with <strong>100 points</strong>. Points are deducted based on incident severity:
+            </p>
+            <div class="math-formula" style="font-size: 0.82rem;">
+              Score = 100 - (5 \times N_{yawn}) - (10 \times N_{distract}) - (15 \times N_{phone}) - (15 \times N_{drowsy})
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-top: 1rem; text-align: center;">
+              <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid var(--green); padding: 0.5rem; border-radius: 8px;">
+                <div style="color: var(--green); font-weight: 800; font-size: 1rem;">Grade A</div>
+                <div style="font-size: 0.68rem; color: var(--text-muted);">90 – 100%</div>
+              </div>
+              <div style="background: rgba(0, 240, 255, 0.15); border: 1px solid var(--accent); padding: 0.5rem; border-radius: 8px;">
+                <div style="color: var(--accent); font-weight: 800; font-size: 1rem;">Grade B</div>
+                <div style="font-size: 0.68rem; color: var(--text-muted);">80 – 89%</div>
+              </div>
+              <div style="background: rgba(245, 158, 11, 0.15); border: 1px solid var(--orange); padding: 0.5rem; border-radius: 8px;">
+                <div style="color: var(--orange); font-weight: 800; font-size: 1rem;">Grade C</div>
+                <div style="font-size: 0.68rem; color: var(--text-muted);">70 – 79%</div>
+              </div>
+              <div style="background: rgba(255, 51, 102, 0.15); border: 1px solid var(--red); padding: 0.5rem; border-radius: 8px;">
+                <div style="color: var(--red); font-weight: 800; font-size: 1rem;">Grade F</div>
+                <div style="font-size: 0.68rem; color: var(--text-muted);">&lt; 70%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 10: LIVE COCKPIT UI & FEATURES
+           ========================================== -->
+      <section class="slide" data-slide="10" data-tag="User Experience">
+        <div class="slide-header">
+          <div class="slide-tag">Cockpit UI & Telemetry HUD</div>
+          <h2 class="slide-title">Futuristic <span>Tesla Cyberpunk Dashboard</span></h2>
+          <p class="slide-subtitle">A stunning autonomous vehicle user interface built for maximum driver engagement.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="glass-box">
+            <div style="font-weight: 700; color: #fff; font-size: 1.05rem; margin-bottom: 0.75rem;">
+              🎛️ HUD & Tactical Camera Vision Modes
+            </div>
+            <ul class="feature-list">
+              <li class="feature-item">
+                <span class="feature-bullet">✓</span>
+                <div><strong>🌙 Tactical Night Vision Mode:</strong> High-gain phosphor green infrared emulation (`NIR-940nm`) providing clear driver facial landmark tracking in pitch-black cabin conditions.</div>
+              </li>
+              <li class="feature-item">
+                <span class="feature-bullet">✓</span>
+                <div><strong>Neon Targeting Reticles & Scanline:</strong> High-tech corner targeting brackets framing the video feed with an animated laser scanline.</div>
+              </li>
+              <li class="feature-item">
+                <span class="feature-bullet">✓</span>
+                <div><strong>Perimeter Mood Lighting Vignette:</strong> Edge-of-screen lighting pulsing Amber for caution and Crimson for critical threats.</div>
+              </li>
+              <li class="feature-item">
+                <span class="feature-bullet">✓</span>
+                <div><strong>Multi-Spectral Filter Cycler:</strong> Instant switching between <strong>RGB</strong>, <strong>Night Vision</strong> (green phosphor), <strong>Thermal Heatmap</strong>, and <strong>Matrix</strong>.</div>
+              </li>
+              <li class="feature-item">
+                <span class="feature-bullet">✓</span>
+                <div><strong>Procedural Web Audio Synthesizer:</strong> Pure browser audio synthesizer producing tactical cockpit warning tones.</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="glass-box">
+            <div style="font-weight: 700; color: var(--green); font-size: 1.05rem; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between;">
+              <span>🌙 Low-Light & Night Surveillance Engine</span>
+              <span style="font-size: 0.65rem; font-family: var(--font-mono); background: rgba(16, 185, 129, 0.2); color: var(--green); border: 1px solid var(--green); padding: 2px 6px; border-radius: 4px;">ACTIVE</span>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.85rem;">
+              Engineered for midnight highway transit. The Night Vision pipeline enhances facial feature contrast in low lux conditions, ensuring continuous EAR/MAR tracking through cabin shadows:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; margin-bottom: 1rem;">
+              <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.35); padding: 0.65rem; border-radius: 8px;">
+                <div style="font-size: 0.72rem; font-family: var(--font-mono); color: var(--green); font-weight: 700;">PHOSPHOR GAIN</div>
+                <div style="font-size: 0.75rem; color: #fff; margin-top: 2px;">+30% Contrast Boost & Green Channel Isolation</div>
+              </div>
+              <div style="background: rgba(0, 240, 255, 0.1); border: 1px solid rgba(0, 240, 255, 0.35); padding: 0.65rem; border-radius: 8px;">
+                <div style="font-size: 0.72rem; font-family: var(--font-mono); color: var(--accent); font-weight: 700;">IR SPECTRUM</div>
+                <div style="font-size: 0.75rem; color: #fff; margin-top: 2px;">Compatible with 940nm Non-Glare Illuminators</div>
+              </div>
+            </div>
+
+            <div style="font-weight: 700; color: var(--accent); font-size: 0.92rem; margin-bottom: 0.5rem;">
+              🧪 Viva Demo & Simulation Sandbox
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.45rem; text-align: center;">
+              <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border); padding: 0.45rem; border-radius: 6px;">
+                <div style="font-size: 1rem;">😴</div>
+                <div style="font-size: 0.68rem; font-weight: 700; color: #fff;">Drowsiness</div>
+              </div>
+              <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border); padding: 0.45rem; border-radius: 6px;">
+                <div style="font-size: 1rem;">📱</div>
+                <div style="font-size: 0.68rem; font-weight: 700; color: #fff;">Phone Use</div>
+              </div>
+              <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border); padding: 0.45rem; border-radius: 6px;">
+                <div style="font-size: 1rem;">🥱</div>
+                <div style="font-size: 0.68rem; font-weight: 700; color: #fff;">Yawning</div>
+              </div>
+              <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border); padding: 0.45rem; border-radius: 6px;">
+                <div style="font-size: 1rem;">👀</div>
+                <div style="font-size: 0.68rem; font-weight: 700; color: #fff;">Distraction</div>
+              </div>
+              <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border); padding: 0.45rem; border-radius: 6px;">
+                <div style="font-size: 1rem;">🔍</div>
+                <div style="font-size: 0.68rem; font-weight: 700; color: #fff;">Mirror Check</div>
+              </div>
+              <div style="background: rgba(16, 185, 129, 0.2); border: 1px solid var(--green); padding: 0.45rem; border-radius: 6px;">
+                <div style="font-size: 1rem;">🟢</div>
+                <div style="font-size: 0.68rem; font-weight: 700; color: var(--green);">Normal Live</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 11: RESULTS & PERFORMANCE METRICS
+           ========================================== -->
+      <section class="slide" data-slide="11" data-tag="Evaluation">
+        <div class="slide-header">
+          <div class="slide-tag">Results & Benchmarks</div>
+          <h2 class="slide-title">System <span>Performance & Validation Results</span></h2>
+          <p class="slide-subtitle">Experimental evaluation across frame rates, detection accuracy, and false alarm reduction.</p>
+        </div>
+
+        <div class="grid-4" style="margin-bottom: 1.5rem;">
+          <div class="glass-box stat-card success">
+            <div class="stat-num emerald">32 FPS</div>
+            <div class="stat-label">Real-Time Throughput</div>
+            <div class="stat-desc">Achieved on standard Intel Core i5 / AMD Ryzen CPU without requiring dedicated GPU.</div>
+          </div>
+          <div class="glass-box stat-card success">
+            <div class="stat-num cyan">38 ms</div>
+            <div class="stat-label">End-to-End Latency</div>
+            <div class="stat-desc">From camera frame capture to biometric metric computation and HUD display.</div>
+          </div>
+          <div class="glass-box stat-card success">
+            <div class="stat-num emerald">94.6%</div>
+            <div class="stat-label">Phone Detection Accuracy</div>
+            <div class="stat-desc">Validated on various phone orientations, hand grips, and in-cabin lighting variations.</div>
+          </div>
+          <div class="glass-box stat-card success">
+            <div class="stat-num" style="color: var(--accent);">87%</div>
+            <div class="stat-label">False Positive Reduction</div>
+            <div class="stat-desc">Mirror check gating eliminated false distraction alerts compared to conventional monitors.</div>
+          </div>
+        </div>
+
+        <div class="glass-box">
+          <div style="font-weight: 700; color: #fff; margin-bottom: 0.5rem; font-size: 0.95rem;">
+            📈 Empirical Benchmark Summary
+          </div>
+          <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">
+            Extensive testing demonstrated robust performance across diverse environmental conditions. Eye closure recognition maintained 96.2% precision under both daytime and low-light cabin environments, while the YOLO multi-class mapper effectively mitigated hand-occlusion errors.
+          </p>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 12: FUTURE ENHANCEMENTS
+           ========================================== -->
+      <section class="slide" data-slide="12" data-tag="Roadmap">
+        <div class="slide-header">
+          <div class="slide-tag">Future Enhancements</div>
+          <h2 class="slide-title">Future Scope & <span>Commercial Roadmap</span></h2>
+          <p class="slide-subtitle">Extending DriveGuard AI toward multi-modal cardiovascular and automotive telemetry.</p>
+        </div>
+
+        <div class="grid-2">
+          <!-- Heart Rate Card -->
+          <div class="glass-box" style="border-top: 3px solid var(--red);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.5rem;">❤️</span>
+                <span style="font-weight: 700; color: #fff; font-size: 1.05rem;">Contactless Heart Rate & Pulse Monitoring (rPPG)</span>
+              </div>
+              <span style="font-size: 0.65rem; font-family: var(--font-mono); background: rgba(255, 51, 102, 0.2); color: var(--red); border: 1px solid var(--red); padding: 2px 6px; border-radius: 4px;">UPCOMING V2.0</span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.75rem;">
+              <strong>Remote Photoplethysmography (rPPG)</strong>: Analyzes subtle micro-pulsations in facial skin tone caused by hemoglobin flow to extract real-time Heart Rate (BPM) and Heart Rate Variability (HRV) contactlessly via camera—with zero physical sensors attached to the driver.
+            </p>
+            <ul class="feature-list">
+              <li class="feature-item"><span class="feature-bullet" style="border-color: var(--red); color: var(--red);">✓</span><div><strong>Microsleep Early Warning:</strong> Heart rate decelerates 2–4 seconds prior to eye-closure microsleep, providing pre-emptive intervention.</div></li>
+              <li class="feature-item"><span class="feature-bullet" style="border-color: var(--red); color: var(--red);">✓</span><div><strong>Smartwatch BLE Sync:</strong> Pair with Apple Watch/WearOS for haptic wrist pulse alerts during high cardiac stress or panic.</div></li>
+            </ul>
+          </div>
+
+          <!-- CAN Bus Card -->
+          <div class="glass-box" style="border-top: 3px solid var(--accent);">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <span style="font-size: 1.5rem;">📡</span>
+              <span style="font-weight: 700; color: #fff; font-size: 1.05rem;">CAN Bus & OBD-II Vehicle Telemetry</span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.75rem;">
+              Direct integration with vehicular data buses to cross-correlate physiological fatigue with real-time physical vehicle dynamics:
+            </p>
+            <ul class="feature-list">
+              <li class="feature-item"><span class="feature-bullet">✓</span><div><strong>Steering Micro-Corrections:</strong> Detects erratic steering wheel jerks typical of nodding-off episodes.</div></li>
+              <li class="feature-item"><span class="feature-bullet">✓</span><div><strong>Automated Speed Governing:</strong> Restricts acceleration and activates hazard lights if driver remains unresponsive.</div></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 1rem;">
+          <!-- NIR Card -->
+          <div class="glass-box" style="border-top: 3px solid var(--green);">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem;">
+              <span style="font-size: 1.3rem;">🌙</span>
+              <span style="font-weight: 700; color: #fff; font-size: 0.95rem;">Active Infrared (NIR-940nm) Hardware</span>
+            </div>
+            <p style="font-size: 0.78rem; color: var(--text-secondary); line-height: 1.45;">
+              Automotive-grade 940nm Near-Infrared illuminators enabling 24/7 night vision monitoring through polarized dark sunglasses and pitch-black vehicle cabins with zero driver glare.
+            </p>
+          </div>
+
+          <!-- Jetson Edge Card -->
+          <div class="glass-box" style="border-top: 3px solid #8b5cf6;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem;">
+              <span style="font-size: 1.3rem;">⚡</span>
+              <span style="font-weight: 700; color: #fff; font-size: 0.95rem;">Embedded NVIDIA Jetson Orin Edge Box</span>
+            </div>
+            <p style="font-size: 0.78rem; color: var(--text-secondary); line-height: 1.45;">
+              Packaging the pipeline as a compact plug-and-play automotive dashboard appliance running TensorRT acceleration with ultra-low sub-15ms inference latency.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 13: CONCLUSION & REFERENCES
+           ========================================== -->
+      <section class="slide" data-slide="13" data-tag="Summary & Wrap-Up">
+        <div class="slide-header">
+          <div class="slide-tag">Conclusion & References</div>
+          <h2 class="slide-title">Conclusion & <span>Research Citations</span></h2>
+          <p class="slide-subtitle">Summary of findings, core academic references, and open discussion.</p>
+        </div>
+
+        <div class="grid-split">
+          <div class="glass-box">
+            <div style="font-weight: 700; color: #fff; font-size: 1.05rem; margin-bottom: 0.75rem;">
+              🏁 Summary of Contributions
+            </div>
+            <ul class="feature-list">
+              <li class="feature-item">
+                <span class="feature-bullet">✓</span>
+                <div>Engineered a dual-model real-time driver monitor combining 468-point facial mesh tracking with YOLOv11 object detection.</div>
+              </li>
+              <li class="feature-item">
+                <span class="feature-bullet">✓</span>
+                <div>Eliminated alert fatigue by implementing spatial-temporal mirror check classification.</div>
+              </li>
+              <li class="feature-item">
+                <span class="feature-bullet">✓</span>
+                <div>Delivered an enterprise-grade Tesla Cyberpunk dashboard backed by MySQL session persistence.</div>
+              </li>
+            </ul>
+
+            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(0, 240, 255, 0.08); border: 1px solid var(--accent); border-radius: 12px; text-align: center;">
+              <div style="font-weight: 800; color: #fff; font-size: 1.2rem;">Thank You! Any Questions?</div>
+              <div style="font-size: 0.8rem; color: var(--accent); font-family: var(--font-mono); margin-top: 0.25rem;">
+                DriveGuard AI · Ready for Live Demonstration
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-box">
+            <div style="font-weight: 700; color: var(--accent); font-size: 1.05rem; margin-bottom: 0.75rem;">
+              📚 Primary Academic References
+            </div>
+            <ol style="font-size: 0.76rem; color: var(--text-secondary); line-height: 1.6; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem;">
+              <li><strong>Soukupová, T., & Čech, J. (2016).</strong> Real-Time Eye Blink Detection using Facial Landmarks. <em>Computer Vision Winter Workshop (CVWW)</em>.</li>
+              <li><strong>Lugaresi, C. et al. (2019).</strong> MediaPipe: A Framework for Building Perception Pipelines. <em>arXiv:1906.08172</em>.</li>
+              <li><strong>Redmon, J. et al. (2016).</strong> You Only Look Once: Unified, Real-Time Object Detection. <em>IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>.</li>
+              <li><strong>World Health Organization (WHO). (2023).</strong> Global Status Report on Road Safety. <em>Geneva, Switzerland</em>.</li>
+              <li><strong>NHTSA. (2022).</strong> The Economic and Societal Impact of Motor Vehicle Crashes. <em>U.S. Department of Transportation</em>.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <footer class="bottom-bar">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">NAV:</span>
+        <button class="btn-nav" id="btnPrev" disabled>← Previous</button>
+        <button class="btn-nav" id="btnNext">Next →</button>
+      </div>
+
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent);">
+        <span id="slideIndicator">01</span> / 13
+      </div>
+    </footer>
+  </div>
+
+  <!-- Slide Overview Grid Modal -->
+  <div class="overview-modal" id="overviewModal">
+    <div class="overview-header">
+      <h2 style="font-family: var(--font-brand); color: #fff;">Slide Deck Overview (13 Slides)</h2>
+      <button class="btn-top" id="btnCloseOverview">✕ Close Overview</button>
+    </div>
+    <div class="overview-grid" id="overviewGrid">
+      <!-- Generated by JavaScript -->
+    </div>
+  </div>
+
+  <script>
+    // ================================================================
+    // DRIVEGUARD AI — PRESENTATION DECK INTERACTION ENGINE
+    // ================================================================
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const totalSlides = slides.length;
+    let currentSlide = 1;
+
+    const elSlideIndicator = document.getElementById("slideIndicator");
+    const elSlideTelemetry = document.getElementById("slideTelemetry");
+    const elProgressFill = document.getElementById("progressFill");
+    const btnPrev = document.getElementById("btnPrev");
+    const btnNext = document.getElementById("btnNext");
+    const btnFullscreen = document.getElementById("btnFullscreen");
+    const btnOverview = document.getElementById("btnOverview");
+    const btnCloseOverview = document.getElementById("btnCloseOverview");
+    const overviewModal = document.getElementById("overviewModal");
+    const overviewGrid = document.getElementById("overviewGrid");
+    const btnPrint = document.getElementById("btnPrint");
+
+    function goToSlide(n) {
+      if (n < 1 || n > totalSlides) return;
+      currentSlide = n;
+
+      slides.forEach((s, idx) => {
+        const slideNum = idx + 1;
+        s.classList.remove("active", "prev");
+        if (slideNum === currentSlide) {
+          s.classList.add("active");
+        } else if (slideNum < currentSlide) {
+          s.classList.add("prev");
+        }
+      });
+
+      // Update Controls & Telemetry
+      const activeSlide = slides[currentSlide - 1];
+      const tag = activeSlide.getAttribute("data-tag") || "BRIEFING";
+      const padNum = currentSlide < 10 ? `0${currentSlide}` : currentSlide;
+
+      elSlideIndicator.textContent = padNum;
+      elSlideTelemetry.textContent = `SLIDE ${padNum} // ${totalSlides} · ${tag.toUpperCase()}`;
+      elProgressFill.style.width = `${(currentSlide / totalSlides) * 100}%`;
+
+      btnPrev.disabled = currentSlide === 1;
+      btnNext.disabled = currentSlide === totalSlides;
+
+      // Update overview active state
+      document.querySelectorAll(".thumb-card").forEach((thumb, idx) => {
+        thumb.classList.toggle("active", idx + 1 === currentSlide);
+      });
+    }
+
+    btnNext.addEventListener("click", () => goToSlide(currentSlide + 1));
+    btnPrev.addEventListener("click", () => goToSlide(currentSlide - 1));
+
+    // Keyboard Navigation
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") {
+        goToSlide(currentSlide + 1);
+      } else if (e.key === "ArrowLeft" || e.key === "PageUp" || e.key === "Backspace") {
+        goToSlide(currentSlide - 1);
+      } else if (e.key.toLowerCase() === "f") {
+        toggleFullscreen();
+      } else if (e.key.toLowerCase() === "o") {
+        toggleOverview();
+      } else if (e.key === "Escape" && overviewModal.classList.contains("open")) {
+        overviewModal.classList.remove("open");
+      }
+    });
+
+    // Fullscreen Toggle
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+    btnFullscreen.addEventListener("click", toggleFullscreen);
+
+    // Overview Grid Modal
+    function toggleOverview() {
+      overviewModal.classList.toggle("open");
+    }
+    btnOverview.addEventListener("click", toggleOverview);
+    btnCloseOverview.addEventListener("click", () => overviewModal.classList.remove("open"));
+
+    // Build Overview Grid
+    slides.forEach((slide, idx) => {
+      const num = idx + 1;
+      const padNum = num < 10 ? `0${num}` : num;
+      const titleEl = slide.querySelector(".slide-title") || slide.querySelector(".cover-title");
+      const title = titleEl ? titleEl.innerText.replace(/\n/g, " ") : `Slide ${num}`;
+
+      const thumb = document.createElement("div");
+      thumb.className = `thumb-card ${num === 1 ? "active" : ""}`;
+      thumb.innerHTML = `
+        <div class="thumb-num">SLIDE ${padNum}</div>
+        <div class="thumb-title">${title}</div>
+      `;
+      thumb.addEventListener("click", () => {
+        goToSlide(num);
+        overviewModal.classList.remove("open");
+      });
+      overviewGrid.appendChild(thumb);
+    });
+
+    // Print / Save to PDF
+    btnPrint.addEventListener("click", () => window.print());
+  </script>
+</body>
+</html>

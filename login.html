@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DriveGuard AI — Driver & Fleet Portal Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-body">
+
+  <!-- Ambient background glow orbs -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <div class="login-page-container">
+    <!-- LEFT PANEL: Hero Feature Showcase -->
+    <div class="login-hero-panel glass-card">
+      <div class="hero-brand">
+        <svg class="hero-logo" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="22" stroke="url(#heroGrad)" stroke-width="2.5"/>
+          <path d="M24 10V18M24 30V38M10 24H18M30 24H38" stroke="url(#heroGrad)" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="24" cy="24" r="7" fill="url(#heroGrad)"/>
+          <defs>
+            <linearGradient id="heroGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#38bdf8"/>
+              <stop offset="100%" stop-color="#22d3ee"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div>
+          <h1 class="hero-title">DriveGuard AI</h1>
+          <p class="hero-subtitle">Next-Gen Enterprise Driver Safety Platform</p>
+        </div>
+      </div>
+
+      <div class="hero-features">
+        <div class="feature-item">
+          <div class="feature-icon">👁️</div>
+          <div>
+            <h3>Real-Time AI Vision Monitoring</h3>
+            <p>Sub-second computer vision tracking for Drowsiness, Yawning, Phone Distraction, and Eye Aspect Ratio (EAR).</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">🔍</div>
+          <div>
+            <h3>Context-Aware Mirror Check Detection</h3>
+            <p>Differentiates natural mirror/blindspot checks from off-road distraction to eliminate alert fatigue.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">⏱️</div>
+          <div>
+            <h3>Continuous Drive & Rest Break Manager</h3>
+            <p>Automated fatigue advisory, rest countdowns, and mandatory rest break compliance reminders.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">🗄️</div>
+          <div>
+            <h3>Persistent MySQL Session Telemetry</h3>
+            <p>Full database logging of driver biometrics, incident history, and individualized safety scorecards.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-footer">
+        <span>Powered by Python • OpenCV • MediaPipe • YOLO • MySQL</span>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL: Authentication Form -->
+    <div class="login-form-panel glass-card">
+      <div class="form-header">
+        <h2>Portal Authentication</h2>
+        <p>Log in with your Driver ID or register a new profile to access the live dashboard</p>
+      </div>
+
+      <!-- Auth Tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabSignIn">Driver Sign In</button>
+        <button class="auth-tab" id="tabRegister">Register New Driver</button>
+      </div>
+
+      <!-- SIGN IN FORM -->
+      <form class="auth-form" id="formSignIn">
+        <div class="form-group">
+          <label for="loginDriverSelect">Select Registered Driver</label>
+          <select id="loginDriverSelect" class="form-select">
+            <option value="DRV-101">Alex Johnson (DRV-101) — TRK-904</option>
+            <option value="DRV-102">Sarah Connor (DRV-102) — TRK-108</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="loginPin">Driver PIN Code</label>
+          <input type="password" id="loginPin" value="1234" class="form-input" placeholder="Enter PIN (Default: 1234)" required>
+        </div>
+
+        <div class="form-group">
+          <label for="loginVehicle">Assigned Vehicle / Asset ID</label>
+          <input type="text" id="loginVehicle" value="TRK-904" class="form-input" placeholder="e.g. TRK-904">
+        </div>
+
+        <button type="submit" class="btn-auth-submit">
+          <span>Sign In & Launch Monitoring</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </form>
+
+      <!-- REGISTER FORM (Hidden by default) -->
+      <form class="auth-form" id="formRegister" style="display: none;">
+        <div class="form-group">
+          <label for="regDriverCode">Driver ID / Code</label>
+          <input type="text" id="regDriverCode" placeholder="e.g. DRV-103" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+          <label for="regDriverName">Driver Full Name</label>
+          <input type="text" id="regDriverName" placeholder="e.g. Michael Scott" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+          <label for="regVehicleReg">Vehicle Registration Number</label>
+          <input type="text" id="regVehicleReg" placeholder="e.g. TRK-502" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+          <label for="regPin">Set PIN Code</label>
+          <input type="password" id="regPin" value="1234" class="form-input" placeholder="Set 4-digit PIN" required>
+        </div>
+
+        <button type="submit" class="btn-auth-submit">
+          <span>Create Profile & Launch</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </form>
+
+      <div class="login-help-note">
+        <span>💡 Demo PIN for all accounts: <code>1234</code></span>
+      </div>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>

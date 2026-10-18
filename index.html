@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DriveGuard AI — AI-Powered Driver Safety Monitoring Dashboard. Real-time drowsiness, distraction, and phone usage detection." />
+  <title>DriveGuard AI — Driver Safety Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts — Outfit for brand/headings, Inter for body, JetBrains Mono for telemetry -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Dynamic Screen-Edge Mood Lighting / Perimeter Alarm Vignette -->
+  <div class="alarm-vignette" id="alarmVignette"></div>
+
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="header-left">
+      <!-- Animated shield logo -->
+      <div class="logo" id="logo">
+        <svg class="logo-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="22" stroke="url(#shieldStroke)" stroke-width="2" stroke-dasharray="4 2"/>
+          <path d="M24 4L6 12V22C6 33.1 13.6 43.3 24 46C34.4 43.3 42 33.1 42 22V12L24 4Z" fill="url(#shieldGrad)" stroke="url(#shieldStroke)" stroke-width="1.5"/>
+          <path d="M24 14C21 14 18 16 18 20C18 22 19 23.5 20.5 24.5C18.5 25.5 16 28 16 32H32C32 28 29.5 25.5 27.5 24.5C29 23.5 30 22 30 20C30 16 27 14 24 14Z" fill="rgba(255,255,255,0.95)"/>
+          <defs>
+            <linearGradient id="shieldGrad" x1="6" y1="4" x2="42" y2="46">
+              <stop offset="0%" stop-color="#0ea5e9"/>
+              <stop offset="50%" stop-color="#0284c7"/>
+              <stop offset="100%" stop-color="#06b6d4"/>
+            </linearGradient>
+            <linearGradient id="shieldStroke" x1="6" y1="4" x2="42" y2="46">
+              <stop offset="0%" stop-color="#38bdf8"/>
+              <stop offset="100%" stop-color="#22d3ee"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="logo-text">
+          <h1>DriveGuard <span class="logo-badge">AI</span></h1>
+          <p class="subtitle">Autonomous Driver Safety Cockpit</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <!-- Driver Profile Indicator with Circular Gauge -->
+      <div class="driver-profile-badge" id="driverProfileBadge">
+        <div class="driver-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="driver-info">
+          <span class="driver-name" id="driverName">Alex Johnson</span>
+          <span class="driver-meta"><span id="driverCode">DRV-101</span> • <span id="driverVehicle">TRK-904</span></span>
+        </div>
+        <div class="driver-score-pill" id="driverScoreBadge">
+          <span class="score-num" id="driverScoreVal">98%</span>
+          <span class="score-grade" id="driverScoreGrade">A</span>
+        </div>
+        <button class="btn-switch-driver" id="btnSwitchDriver" title="Switch Driver / Logout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        </button>
+      </div>
+
+      <!-- System status indicator -->
+      <div class="system-status" id="systemStatus">
+        <span class="status-dot" id="statusDot"></span>
+        <span class="status-text" id="statusText">Connecting…</span>
+      </div>
+      <!-- Current date/time -->
+      <div class="datetime" id="datetime"></div>
+      <!-- Reset session button -->
+      <button class="btn-reset" id="btnReset" title="Reset Session">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 105.64-11.36L1 10"/></svg>
+        <span>Reset Session</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="dashboard">
+
+    <!-- -------- GRADUATED THREAT LEVEL & CONTEXT BANNER -------- -->
+    <div class="threat-level-bar glass-card" id="threatLevelBar">
+      <div class="threat-stage-info">
+        <span class="threat-badge stage-normal" id="threatBadge">STAGE 0 • NORMAL</span>
+        <span class="threat-desc" id="threatDesc">Driver focused & attentive</span>
+      </div>
+      <div class="threat-meters">
+        <div class="threat-segment segment-0 active" id="segment0" title="Stage 0: Normal / Mirror Check"></div>
+        <div class="threat-segment segment-1" id="segment1" title="Stage 1: Early Caution"></div>
+        <div class="threat-segment segment-2" id="segment2" title="Stage 2: Critical Alarm"></div>
+      </div>
+      <div class="context-pill" id="contextPill">
+        <span class="context-icon">🔍</span>
+        <span id="contextPillText">Mirror Check (Left)</span>
+      </div>
+    </div>
+
+    <!-- -------- TOP ROW: Camera + Status Cards -------- -->
+    <div class="top-row">
+
+      <!-- Live Camera Panel -->
+      <section class="camera-panel glass-card" id="cameraPanel">
+        <div class="section-header">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            <h2>Live Camera HUD</h2>
+          </div>
+          <div class="camera-badges">
+            <span class="badge badge-live" id="badgeLive">
+              <span class="live-dot"></span> Live Telemetry
+            </span>
+            <button class="btn-icon" id="btnFullscreen" title="Toggle Fullscreen">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="camera-wrapper" id="cameraWrapper">
+          <!-- Sci-Fi HUD Reticle Corners -->
+          <div class="hud-corner hud-tl"></div>
+          <div class="hud-corner hud-tr"></div>
+          <div class="hud-corner hud-bl"></div>
+          <div class="hud-corner hud-br"></div>
+          <div class="hud-scanline"></div>
+
+          <!-- HUD Telemetry Overlay Badges -->
+          <div class="hud-overlay-top">
+            <span class="hud-pill"><span class="hud-radar-dot"></span> AI VISION 468 MESH</span>
+            <span class="hud-pill mono" id="hudVisionPill">MODE: RGB</span>
+            <span class="hud-pill mono">30 FPS • 1080P</span>
+          </div>
+          <div class="hud-overlay-bottom">
+            <span class="hud-pill mono" id="hudEarPill">EAR: 0.320</span>
+            <span class="hud-pill" id="hudStatusPill">STATUS: ATTENTIVE</span>
+          </div>
+
+          <!-- Real MJPEG stream from Flask -->
+          <img
+            id="cameraFeed"
+            src="/video_feed"
+            alt="Live Driver Camera"
+            class="camera-feed"
+          />
+          <!-- Offline overlay (shown when stream unavailable) -->
+          <div class="camera-offline" id="cameraOffline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l22 22"/><path d="M21 21H3a2 2 0 01-2-2V8a2 2 0 012-2h3m3-3h6l2 3h4a2 2 0 012 2v9.34"/><path d="M15.28 15.28A4 4 0 008.72 8.72"/></svg>
+            <p>Camera Feed Offline</p>
+            <span>Waiting for Flask backend stream</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Safety Status Cards Grid -->
+      <section class="status-cards-panel">
+        <div class="section-header">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <h2>Safety Status</h2>
+          </div>
+        </div>
+        <div class="status-grid">
+
+          <!-- Face Detection -->
+          <div class="status-card glass-card" id="cardFace">
+            <div class="status-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 10-16 0"/></svg>
+            </div>
+            <div class="status-info">
+              <span class="status-label">Face Detection</span>
+              <span class="status-value" id="valFace">—</span>
+            </div>
+            <div class="status-indicator" id="indFace"></div>
+          </div>
+
+          <!-- Drowsiness -->
+          <div class="status-card glass-card" id="cardDrowsiness">
+            <div class="status-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 18a5 5 0 00-10 0"/><line x1="12" y1="9" x2="12" y2="2"/><path d="M4.22 10.22l1.42 1.42"/><line x1="1" y1="18" x2="3" y2="18"/><path d="M21 18h2"/><path d="M18.36 11.64l1.42-1.42"/></svg>
+            </div>
+            <div class="status-info">
+              <span class="status-label">Drowsiness</span>
+              <span class="status-value" id="valDrowsiness">—</span>
+            </div>
+            <div class="status-indicator" id="indDrowsiness"></div>
+          </div>
+
+          <!-- Yawning -->
+          <div class="status-card glass-card" id="cardYawning">
+            <div class="status-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            </div>
+            <div class="status-info">
+              <span class="status-label">Yawning</span>
+              <span class="status-value" id="valYawning">—</span>
+            </div>
+            <div class="status-indicator" id="indYawning"></div>
+          </div>
+
+          <!-- Phone Usage -->
+          <div class="status-card glass-card" id="cardPhone">
+            <div class="status-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <div class="status-info">
+              <span class="status-label">Phone Usage</span>
+              <span class="status-value" id="valPhone">—</span>
+            </div>
+            <div class="status-indicator" id="indPhone"></div>
+          </div>
+
+          <!-- Distraction -->
+          <div class="status-card glass-card" id="cardDistraction">
+            <div class="status-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div class="status-info">
+              <span class="status-label">Distraction</span>
+              <span class="status-value" id="valDistraction">—</span>
+            </div>
+            <div class="status-indicator" id="indDistraction"></div>
+          </div>
+
+          <!-- Driver Attention -->
+          <div class="status-card glass-card" id="cardAttention">
+            <div class="status-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <div class="status-info">
+              <span class="status-label">Driver Attention</span>
+              <span class="status-value" id="valAttention">—</span>
+            </div>
+            <div class="status-indicator" id="indAttention"></div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+    <!-- -------- MIDDLE ROW: Biometrics + Event Counters -------- -->
+    <div class="middle-row">
+
+      <!-- Driver Biometrics -->
+      <section class="biometrics-panel glass-card" id="biometricsPanel">
+        <div class="section-header">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <h2>Driver Biometrics</h2>
+          </div>
+        </div>
+        <div class="biometrics-grid">
+
+          <!-- EAR -->
+          <div class="bio-item">
+            <div class="bio-header">
+              <span class="bio-label">Eye Aspect Ratio (EAR)</span>
+              <span class="bio-value" id="bioEar">—</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill ear-fill" id="barEar" style="width:0%"></div>
+            </div>
+          </div>
+
+          <!-- Mouth Ratio -->
+          <div class="bio-item">
+            <div class="bio-header">
+              <span class="bio-label">Mouth Ratio</span>
+              <span class="bio-value" id="bioMouth">—</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill mouth-fill" id="barMouth" style="width:0%"></div>
+            </div>
+          </div>
+
+          <!-- Mouth Width -->
+          <div class="bio-item">
+            <div class="bio-header">
+              <span class="bio-label">Mouth Width</span>
+              <span class="bio-value" id="bioMouthW">—</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill mouthw-fill" id="barMouthW" style="width:0%"></div>
+            </div>
+          </div>
+
+          <!-- Attention -->
+          <div class="bio-item">
+            <div class="bio-header">
+              <span class="bio-label">Driver Attention</span>
+              <span class="bio-value accent" id="bioAttention">—</span>
+            </div>
+          </div>
+
+          <!-- Face Status -->
+          <div class="bio-item">
+            <div class="bio-header">
+              <span class="bio-label">Face Status</span>
+              <span class="bio-value accent" id="bioFaceStatus">—</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Driving Duration & Rest Break Panel -->
+      <section class="break-panel glass-card" id="breakPanel">
+        <div class="section-header">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <h2>Driving Duration & Rest Break</h2>
+          </div>
+          <span class="break-pill pill-optimal" id="breakPill">OPTIMAL</span>
+        </div>
+        <div class="break-content">
+          <div class="drive-timer-wrap">
+            <span class="drive-timer-label">Continuous Drive Time</span>
+            <span class="drive-timer-value" id="valDriveDuration">00h 00m 00s</span>
+          </div>
+          <div class="break-progress-wrap">
+            <div class="bio-header">
+              <span class="bio-label">Recommended Break Interval (2 Hours)</span>
+              <span class="bio-value" id="valBreakPercent">0%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill break-fill" id="barBreak" style="width:0%"></div>
+            </div>
+          </div>
+          <div class="break-footer">
+            <p class="break-status-msg" id="msgBreakStatus">Continuous driving time is optimal. Drive safely!</p>
+            <button class="btn-log-break" id="btnLogBreak" title="Log a rest break & reset drive timer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+              <span>Log Rest Break</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Event Counters -->
+      <section class="counters-panel glass-card" id="countersPanel">
+        <div class="section-header">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <h2>Event Counters</h2>
+          </div>
+        </div>
+        <div class="counters-grid">
+
+          <div class="counter-card" id="cntTotal">
+            <div class="counter-number" id="numTotal">0</div>
+            <div class="counter-label">Total Alerts</div>
+            <div class="counter-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+            </div>
+          </div>
+
+          <div class="counter-card" id="cntDrowsiness">
+            <div class="counter-number" id="numDrowsiness">0</div>
+            <div class="counter-label">Drowsiness</div>
+            <div class="counter-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 18a5 5 0 00-10 0"/><line x1="12" y1="9" x2="12" y2="2"/></svg>
+            </div>
+          </div>
+
+          <div class="counter-card" id="cntYawning">
+            <div class="counter-number" id="numYawning">0</div>
+            <div class="counter-label">Yawning</div>
+            <div class="counter-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
+            </div>
+          </div>
+
+          <div class="counter-card" id="cntPhone">
+            <div class="counter-number" id="numPhone">0</div>
+            <div class="counter-label">Phone Usage</div>
+            <div class="counter-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>
+            </div>
+          </div>
+
+          <div class="counter-card" id="cntDistraction">
+            <div class="counter-number" id="numDistraction">0</div>
+            <div class="counter-label">Distraction</div>
+            <div class="counter-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- -------- BOTTOM ROW: Alert History -------- -->
+    <section class="alerts-panel glass-card" id="alertsPanel">
+      <div class="section-header">
+        <div class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <h2>Alert History</h2>
+        </div>
+        <span class="alert-count-badge" id="alertCountBadge">0 events</span>
+      </div>
+      <div class="alert-list" id="alertList">
+        <!-- Alert entries are injected by JavaScript -->
+        <div class="alert-empty" id="alertEmpty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          <p>No alerts recorded — all clear!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- -------- SESSION HISTORY (MySQL) -------- -->
+    <section class="history-panel glass-card" id="historyPanel">
+      <div class="section-header">
+        <div class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <h2>Session History</h2>
+          <span class="db-badge">MySQL</span>
+        </div>
+        <button class="btn-icon" id="btnRefreshHistory" title="Refresh History">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 105.64-11.36L1 10"/></svg>
+        </button>
+      </div>
+      <div class="history-table-wrap">
+        <table class="history-table" id="historyTable">
+          <thead>
+            <tr>
+              <th>Session</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Alerts</th>
+              <th>Drowsy</th>
+              <th>Yawn</th>
+              <th>Phone</th>
+              <th>Distract</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="historyBody">
+            <!-- Rows injected by JavaScript -->
+          </tbody>
+        </table>
+        <div class="history-empty" id="historyEmpty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <p>No past sessions found</p>
+        </div>
+      </div>
+
+      <!-- Session Detail Modal (shown when clicking a session) -->
+      <div class="session-detail" id="sessionDetail" style="display:none;">
+        <div class="section-header">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <h2 id="detailTitle">Session Detail</h2>
+          </div>
+          <button class="btn-icon" id="btnCloseDetail" title="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="detail-alerts" id="detailAlerts"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <p>DriveGuard AI &copy; 2026 &mdash; AI-Powered Driver Safety System &bull; Built with Python, OpenCV, MediaPipe &amp; YOLO</p>
+  </footer>
+
+  <!-- ===== TOAST NOTIFICATION (shown on warnings) ===== -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ===== DRIVER AUTHENTICATION MODAL ===== -->
+  <div class="login-modal-overlay" id="loginModal">
+    <div class="login-card glass-card">
+      <div class="login-header">
+        <div class="login-logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h2>Driver Authentication</h2>
+        <p>Select your profile or register to start continuous monitoring</p>
+      </div>
+      <form class="login-form" id="loginForm">
+        <div class="form-group">
+          <label for="selectDriver">Select Registered Driver</label>
+          <select id="selectDriver" class="form-select">
+            <option value="DRV-101">Alex Johnson (DRV-101) — TRK-904</option>
+            <option value="DRV-102">Sarah Connor (DRV-102) — TRK-108</option>
+            <option value="NEW">+ Register New Driver Profile</option>
+          </select>
+        </div>
+        <div class="form-group" id="groupDriverCode" style="display: none;">
+          <label for="inputDriverCode">Driver Code</label>
+          <input type="text" id="inputDriverCode" placeholder="e.g. DRV-103" class="form-input">
+        </div>
+        <div class="form-group" id="groupDriverName" style="display: none;">
+          <label for="inputDriverName">Driver Full Name</label>
+          <input type="text" id="inputDriverName" placeholder="e.g. Michael Scott" class="form-input">
+        </div>
+        <div class="form-group" id="groupVehicleReg" style="display: none;">
+          <label for="inputVehicleReg">Vehicle Registration</label>
+          <input type="text" id="inputVehicleReg" placeholder="e.g. TRK-502" class="form-input">
+        </div>
+        <div class="form-group">
+          <label for="inputPin">PIN Code (Default: 1234)</label>
+          <input type="password" id="inputPin" value="1234" class="form-input" placeholder="Enter PIN">
+        </div>
+        <button type="submit" class="btn-login-submit" id="btnLoginSubmit">
+          <span>Authenticate Driver</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== FLOATING COMMAND DOCK (Tesla / Autonomous Fleet Command Center) ===== -->
+  <aside class="floating-dock glass-card" id="floatingDock">
+    <div class="dock-pill-group">
+      <button class="dock-btn" id="dockBtnAudio" title="Toggle Cockpit Audio Alerts (Speech/Beeps/Mute)">
+        <span class="dock-icon" id="dockAudioIcon">🔊</span>
+        <span class="dock-label" id="dockAudioLabel">AUDIO: ON</span>
+      </button>
+
+      <button class="dock-btn" id="dockBtnVision" title="Cycle Vision Mode (RGB, Night Vision, Thermal Heatmap, Matrix)">
+        <span class="dock-icon">👁️</span>
+        <span class="dock-label" id="dockVisionLabel">MODE: RGB</span>
+      </button>
+
+      <div class="dock-divider"></div>
+
+      <button class="dock-btn" id="dockBtnReset" title="Quick Reset Active Session">
+        <span class="dock-icon">🔄</span>
+        <span class="dock-label">RESET</span>
+      </button>
+
+      <button class="dock-btn" id="dockBtnSim" title="Open Simulation & Viva Demo Sandbox">
+        <span class="dock-icon">🧪</span>
+        <span class="dock-label">DEMO SANDBOX</span>
+      </button>
+
+      <a href="/presentation" target="_blank" class="dock-btn" id="dockBtnSlides" title="Open Project Presentation Deck">
+        <span class="dock-icon">📊</span>
+        <span class="dock-label">SLIDES</span>
+      </a>
+
+      <a href="/poster" target="_blank" class="dock-btn" id="dockBtnPoster" title="Open A3 Exhibition & Review Poster (297x420mm)">
+        <span class="dock-icon">🖼️</span>
+        <span class="dock-label">POSTER</span>
+      </a>
+
+      <div class="dock-divider"></div>
+
+      <button class="dock-btn" id="dockBtnFullscreen" title="Toggle Cockpit Fullscreen">
+        <span class="dock-icon">🖥️</span>
+        <span class="dock-label">EXPAND</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ===== INTERACTIVE DEMO / SIMULATION SANDBOX DRAWER ===== -->
+  <div class="sandbox-drawer glass-card" id="sandboxDrawer">
+    <div class="sandbox-header">
+      <div class="sandbox-title">
+        <span class="sandbox-icon">🧪</span>
+        <div>
+          <h3>Simulation & Viva Demo Sandbox</h3>
+          <span class="sandbox-subtitle">One-click alert triggers for instant demonstrations</span>
+        </div>
+      </div>
+      <button class="btn-close-sandbox" id="btnCloseSandbox" title="Close Sandbox">✕</button>
+    </div>
+    <div class="sandbox-actions">
+      <button class="btn-sim-action" data-trigger="drowsy">
+        <span class="sim-icon">😴</span>
+        <span>Simulate Drowsiness</span>
+      </button>
+      <button class="btn-sim-action" data-trigger="phone">
+        <span class="sim-icon">📱</span>
+        <span>Simulate Phone Usage</span>
+      </button>
+      <button class="btn-sim-action" data-trigger="yawn">
+        <span class="sim-icon">🥱</span>
+        <span>Simulate Yawning</span>
+      </button>
+      <button class="btn-sim-action" data-trigger="distract">
+        <span class="sim-icon">👀</span>
+        <span>Simulate Distraction</span>
+      </button>
+      <button class="btn-sim-action" data-trigger="mirror">
+        <span class="sim-icon">🔍</span>
+        <span>Simulate Mirror Check</span>
+      </button>
+      <button class="btn-sim-action sim-clear" data-trigger="clear">
+        <span class="sim-icon">🟢</span>
+        <span>Restore Normal</span>
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

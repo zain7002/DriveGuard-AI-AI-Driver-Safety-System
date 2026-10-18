@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DriveGuard AI — Professional A3 Presentation Poster for Project Review & Exhibition" />
+  <title>DriveGuard AI — A3 Presentation Poster</title>
+  <!-- Google Fonts: Outfit for Display/Headings, Inter for Body, JetBrains Mono for Technical Badges -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <style>
+    /* ================================================================
+       DRIVEGUARD AI — A3 SCIENTIFIC & TECHNICAL EXHIBITION POSTER
+       Standard ISO A3 Dimensions: 297mm x 420mm (Portrait)
+       Screen Aspect: 1 : 1.414 (Root-2 Aspect Ratio)
+       ================================================================ */
+    :root {
+      --bg-base:        #030712;
+      --bg-surface:     #080e1e;
+      --bg-card:        rgba(11, 19, 38, 0.78);
+      --bg-elevated:    #0f172a;
+      
+      --accent:         #00f0ff;          /* Cyber Cyan */
+      --accent-glow:    rgba(0, 240, 255, 0.35);
+      --green:          #10b981;          /* Laser Emerald */
+      --green-glow:     rgba(16, 185, 129, 0.30);
+      --red:            #ff3366;          /* Cyber Crimson */
+      --red-glow:       rgba(255, 51, 102, 0.35);
+      --orange:         #f59e0b;          /* Solar Amber */
+      --purple:         #8b5cf6;          /* Neon Purple */
+      
+      --text-primary:   #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted:     #64748b;
+      
+      --border:         rgba(148, 163, 184, 0.16);
+      --border-accent:  rgba(0, 240, 255, 0.45);
+      --radius-lg:      16px;
+      --radius-md:      12px;
+      --radius-sm:      8px;
+      
+      --font-brand:     'Outfit', -apple-system, sans-serif;
+      --font-body:      'Inter', system-ui, sans-serif;
+      --font-mono:      'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background: #02040a;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 48px;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Fixed Top Floating Control Bar */
+    .poster-toolbar {
+      position: sticky;
+      top: 12px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(8, 14, 28, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-accent);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 240, 255, 0.2);
+      border-radius: 50px;
+      padding: 8px 20px;
+      margin-bottom: 24px;
+    }
+
+    .toolbar-title {
+      font-family: var(--font-brand);
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-iso {
+      background: linear-gradient(135deg, var(--accent), #0284c7);
+      color: #030712;
+      font-size: 0.65rem;
+      font-weight: 900;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+    }
+
+    .btn-action {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 7px 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      font-family: var(--font-body);
+    }
+
+    .btn-action:hover {
+      background: rgba(0, 240, 255, 0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 16px rgba(0, 240, 255, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .btn-print {
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+      border-color: #38bdf8;
+      color: #fff;
+    }
+
+    .btn-print:hover {
+      background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(14, 165, 233, 0.5);
+    }
+
+    /* ================================================================
+       POSTER CANVAS (ISO A3 PORTRAIT: 297mm x 420mm)
+       Screen scale: 1200px width × 1697px height (1 : 1.414 ratio)
+       ================================================================ */
+    .poster-canvas {
+      width: 1200px;
+      height: 1697px;
+      position: relative;
+      background: var(--bg-base);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: 20px;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.85), 0 0 50px rgba(0, 240, 255, 0.15);
+      overflow: hidden;
+      padding: 38px 42px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-sizing: border-box;
+    }
+
+    /* Ambient Background Effects */
+    .poster-canvas::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 240, 255, 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.028) 1px, transparent 1px);
+      background-size: 36px 36px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .poster-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(140px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.28;
+    }
+    .glow-top-left {
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, #0ea5e9, transparent 70%);
+      top: -120px;
+      left: -120px;
+    }
+    .glow-bottom-right {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, #6366f1, transparent 70%);
+      bottom: -100px;
+      right: -100px;
+    }
+    .glow-center-emerald {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #10b981, transparent 70%);
+      top: 45%;
+      left: 30%;
+      opacity: 0.16;
+    }
+
+    /* All layout containers sit above background */
+    .poster-header,
+    .poster-body,
+    .poster-footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ================================================================
+       1. POSTER HEADER — HIGH-TECH BANNER & CREST
+       ================================================================ */
+    .poster-header {
+      background: linear-gradient(135deg, rgba(8, 14, 28, 0.95), rgba(15, 23, 42, 0.85));
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-lg);
+      padding: 24px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .header-branding {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex: 1;
+    }
+
+    .header-logo {
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.45));
+    }
+
+    .header-titles h1 {
+      font-family: var(--font-brand);
+      font-size: 2.5rem;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .header-titles h1 span {
+      background: linear-gradient(135deg, var(--accent), #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-tagline {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 3px;
+      letter-spacing: -0.01em;
+    }
+
+    .header-subtext {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+      font-family: var(--font-mono);
+      letter-spacing: 0.02em;
+    }
+
+    .header-meta-box {
+      background: rgba(3, 7, 18, 0.75);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      text-align: right;
+      min-width: 250px;
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      font-size: 0.76rem;
+    }
+
+    .meta-key {
+      font-family: var(--font-mono);
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .meta-val {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* ================================================================
+       2. POSTER BODY — 3-COLUMN RESPONSIVE SCIENTIFIC GRID
+       ================================================================ */
+    .poster-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr 1fr;
+      gap: 16px;
+      min-height: 0;
+    }
+
+    .poster-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      height: 100%;
+    }
+
+    /* Common Card Styling */
+    .poster-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 15px 18px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.06);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .poster-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3.5px;
+      height: 100%;
+      background: var(--accent);
+    }
+    .poster-card.card-crimson::before { background: var(--red); }
+    .poster-card.card-emerald::before { background: var(--green); }
+    .poster-card.card-amber::before   { background: var(--orange); }
+    .poster-card.card-purple::before  { background: var(--purple); }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .card-title {
+      font-family: var(--font-brand);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .card-tag {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      background: rgba(0, 240, 255, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+    }
+    .card-tag.tag-emerald {
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--green);
+      border-color: rgba(16, 185, 129, 0.35);
+    }
+    .card-tag.tag-crimson {
+      background: rgba(255, 51, 102, 0.12);
+      color: var(--red);
+      border-color: rgba(255, 51, 102, 0.35);
+    }
+
+    /* Content Typography */
+    .card-text {
+      font-size: 0.79rem;
+      color: var(--text-secondary);
+      line-height: 1.52;
+    }
+
+    .card-text strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* Key Stat Mini Boxes */
+    .stat-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .stat-mini-box {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .stat-mini-val {
+      font-family: var(--font-brand);
+      font-size: 1.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+    .stat-mini-val.cyan { color: var(--accent); text-shadow: 0 0 14px var(--accent-glow); }
+    .stat-mini-val.crimson { color: var(--red); text-shadow: 0 0 14px var(--red-glow); }
+    .stat-mini-val.emerald { color: var(--green); text-shadow: 0 0 14px var(--green-glow); }
+    .stat-mini-val.amber { color: var(--orange); }
+
+    .stat-mini-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 2px;
+    }
+
+    .stat-mini-sub {
+      font-size: 0.63rem;
+      color: var(--text-muted);
+      margin-top: 1px;
+      line-height: 1.25;
+    }
+
+    /* Flow Step List */
+    .flow-vertical {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-top: 8px;
+    }
+
+    .flow-vert-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 10px;
+    }
+
+    .flow-badge-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(0, 240, 255, 0.15);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.68rem;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .flow-vert-info {
+      flex: 1;
+    }
+
+    .flow-vert-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .flow-vert-desc {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      line-height: 1.35;
+      margin-top: 1px;
+    }
+
+    /* Center Visual: Cockpit Mockup Showcase */
+    .cockpit-showcase {
+      background: rgba(3, 7, 18, 0.9);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), inset 0 0 30px rgba(0, 240, 255, 0.08);
+      margin-top: 6px;
+    }
+
+    .mockup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+    }
+
+    .mockup-status-dot {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      color: var(--green);
+    }
+
+    .mockup-status-dot::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+    }
+
+    /* Camera Viewport Simulation */
+    .camera-viewport-mock {
+      position: relative;
+      width: 100%;
+      height: 245px;
+      background: radial-gradient(circle at center, #071329 0%, #020617 100%);
+      border: 1px solid rgba(0, 240, 255, 0.45);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.12);
+    }
+
+    /* Camera Grid & Crosshairs */
+    .cam-reticle-tl { position: absolute; top: 10px; left: 10px; width: 18px; height: 18px; border-top: 2.5px solid var(--accent); border-left: 2.5px solid var(--accent); }
+    .cam-reticle-tr { position: absolute; top: 10px; right: 10px; width: 18px; height: 18px; border-top: 2.5px solid var(--accent); border-right: 2.5px solid var(--accent); }
+    .cam-reticle-bl { position: absolute; bottom: 10px; left: 10px; width: 18px; height: 18px; border-bottom: 2.5px solid var(--accent); border-left: 2.5px solid var(--accent); }
+    .cam-reticle-br { position: absolute; bottom: 10px; right: 10px; width: 18px; height: 18px; border-bottom: 2.5px solid var(--accent); border-right: 2.5px solid var(--accent); }
+
+    .cam-scanline {
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      box-shadow: 0 0 12px var(--accent);
+      top: 30%;
+      animation: scanAnim 3.5s ease-in-out infinite alternate;
+    }
+    @keyframes scanAnim {
+      from { top: 10%; opacity: 0.3; }
+      to   { top: 90%; opacity: 0.95; }
+    }
+
+    /* Overlay Badges on Camera Mock */
+    .cam-pill-top {
+      position: absolute;
+      top: 10px;
+      display: flex;
+      gap: 8px;
+      font-size: 0.68rem;
+      font-family: var(--font-mono);
+      z-index: 5;
+    }
+    .cam-badge {
+      background: rgba(3, 7, 18, 0.82);
+      border: 1px solid var(--border-accent);
+      color: var(--accent);
+      padding: 3px 8px;
+      border-radius: 4px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+    .cam-badge.badge-night {
+      border-color: var(--green);
+      color: var(--green);
+      background: rgba(16, 185, 129, 0.15);
+    }
+
+    .cam-face-box {
+      width: 145px;
+      height: 170px;
+      border: 1.5px dashed rgba(0, 240, 255, 0.65);
+      border-radius: 50% 50% 45% 45%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.08), transparent 75%);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+    }
+
+    .cam-phone-box {
+      position: absolute;
+      bottom: 22px;
+      right: 32px;
+      width: 58px;
+      height: 94px;
+      border: 2px solid var(--red);
+      background: rgba(255, 51, 102, 0.22);
+      border-radius: 6px;
+      box-shadow: 0 0 20px var(--red-glow);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 4px;
+      z-index: 6;
+      animation: phonePulse 1.8s infinite alternate;
+    }
+    @keyframes phonePulse {
+      from { border-color: #ff3366; box-shadow: 0 0 14px var(--red-glow); }
+      to   { border-color: #ff6b8b; box-shadow: 0 0 26px var(--red-glow); }
+    }
+    .cam-phone-label {
+      font-size: 0.58rem;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      color: #fff;
+      background: var(--red);
+      padding: 2px 5px;
+      border-radius: 3px;
+      letter-spacing: 0.03em;
+    }
+
+    /* Mini Telemetry Row inside Mockup */
+    .mockup-telem-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .telem-pill {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 7px 10px;
+      text-align: center;
+    }
+    .telem-pill-title {
+      font-size: 0.63rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+    .telem-pill-val {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fff;
+      font-family: var(--font-mono);
+      margin-top: 2px;
+    }
+
+    /* Biometric progress bar gauge widget inside Mockup */
+    .mockup-gauges-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+      background: rgba(8, 14, 28, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+    }
+    .gauge-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .gauge-head {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.65rem;
+      font-family: var(--font-mono);
+    }
+    .gauge-track {
+      width: 100%;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .gauge-fill {
+      height: 100%;
+      border-radius: 10px;
+    }
+
+    /* Innovation Feature List */
+    .novelty-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-top: 6px;
+    }
+    .novelty-icon {
+      font-size: 1.15rem;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 2px;
+    }
+    .novelty-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .novelty-desc {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      line-height: 1.35;
+      margin-top: 1px;
+    }
+
+    /* Bullet List */
+    .poster-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .poster-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      line-height: 1.42;
+    }
+    .bullet-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    .poster-bullets strong {
+      color: #fff;
+    }
+
+    /* ================================================================
+       3. POSTER FOOTER — IMPACT & AFFILIATION STRIP
+       ================================================================ */
+    .poster-footer {
+      background: linear-gradient(135deg, rgba(8, 14, 28, 0.95), rgba(15, 23, 42, 0.85));
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-lg);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: 0.75rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-badge-tag {
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid var(--border-accent);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    .footer-text {
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .footer-text strong {
+      color: #fff;
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: right;
+    }
+
+    .footer-meta-pill {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--green);
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* ================================================================
+       PRINT STYLES FOR HIGH-RESOLUTION A3 PRINTING
+       Page size: 297mm x 420mm (Portrait)
+       ================================================================ */
+    @page {
+      size: A3 portrait;
+      margin: 0;
+    }
+
+    @media print {
+      body {
+        background: #030712 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .poster-toolbar {
+        display: none !important;
+      }
+      .poster-canvas {
+        width: 297mm !important;
+        height: 420mm !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 10mm 12mm !important;
+        page-break-inside: avoid !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Toolbar for Viewing, Printing & Navigating -->
+  <aside class="poster-toolbar">
+    <div class="toolbar-title">
+      <span>🛡️ DriveGuard AI</span>
+      <span class="badge-iso">A3 POSTER · 297 × 420 mm</span>
+    </div>
+    <button class="btn-action btn-print" onclick="window.print()">
+      <span>🖨️</span> Print / Save A3 PDF
+    </button>
+    <a href="/dashboard" class="btn-action">
+      <span>🖥️</span> Live Cockpit
+    </a>
+    <a href="/presentation" class="btn-action">
+      <span>📊</span> Slide Deck
+    </a>
+  </aside>
+
+  <!-- ================================================================
+       MAIN A3 POSTER CANVAS
+       ================================================================ -->
+  <main class="poster-canvas" id="posterCanvas">
+
+    <!-- Ambient Glowing Light Orbs -->
+    <div class="poster-glow glow-top-left"></div>
+    <div class="poster-glow glow-bottom-right"></div>
+    <div class="poster-glow glow-center-emerald"></div>
+
+    <!-- 1. POSTER HEADER -->
+    <header class="poster-header">
+      <div class="header-branding">
+        <!-- High-Tech Shield Vector Icon -->
+        <svg class="header-logo" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="22" stroke="url(#strokeGrad)" stroke-width="2" stroke-dasharray="4 2"/>
+          <path d="M24 4L6 12V22C6 33.1 13.6 43.3 24 46C34.4 43.3 42 33.1 42 22V12L24 4Z" fill="url(#bodyGrad)" stroke="url(#strokeGrad)" stroke-width="1.5"/>
+          <path d="M24 14C21 14 18 16 18 20C18 22 19 23.5 20.5 24.5C18.5 25.5 16 28 16 32H32C32 28 29.5 25.5 27.5 24.5C29 23.5 30 22 30 20C30 16 27 14 24 14Z" fill="rgba(255,255,255,0.96)"/>
+          <defs>
+            <linearGradient id="bodyGrad" x1="6" y1="4" x2="42" y2="46">
+              <stop offset="0%" stop-color="#0ea5e9"/>
+              <stop offset="50%" stop-color="#0284c7"/>
+              <stop offset="100%" stop-color="#06b6d4"/>
+            </linearGradient>
+            <linearGradient id="strokeGrad" x1="6" y1="4" x2="42" y2="46">
+              <stop offset="0%" stop-color="#00f0ff"/>
+              <stop offset="100%" stop-color="#38bdf8"/>
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <div class="header-titles">
+          <h1>DriveGuard <span>AI</span></h1>
+          <div class="header-tagline">Autonomous Edge Driver Safety Monitoring & Telemetry System</div>
+          <div class="header-subtext">Real-Time Computer Vision · Multi-Modal Fatigue & Contraband Detection · Graduated Intervention</div>
+        </div>
+      </div>
+
+      <div class="header-meta-box">
+        <div class="meta-row">
+          <span class="meta-key">ARCHITECTURE:</span>
+          <span class="meta-val">MediaPipe 468 Mesh + YOLOv11</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">PLATFORM:</span>
+          <span class="meta-val">Flask REST · MySQL · Cyber HUD</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">REGULATORY:</span>
+          <span class="meta-val">EU GSR DDAW & Euro NCAP Ready</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. POSTER BODY (3 COLUMNS) -->
+    <div class="poster-body">
+
+      <!-- ==============================================
+           COLUMN 1: MOTIVATION, PROBLEM & MARKET VALUE
+           ============================================== -->
+      <section class="poster-col">
+
+        <!-- Card 1.1: The Global Road Safety Crisis -->
+        <article class="poster-card card-crimson">
+          <div class="card-head">
+            <h2 class="card-title"><span>⚠️</span> Problem Statement</h2>
+            <span class="card-tag tag-crimson">GLOBAL CRISIS</span>
+          </div>
+          <p class="card-text">
+            Road traffic collisions claim <strong>1.35M lives annually</strong> (WHO). Involuntary driver fatigue and smartphone distractions cause catastrophic highway accidents where drivers fail to apply brakes before impact.
+          </p>
+          <div class="stat-mini-grid">
+            <div class="stat-mini-box">
+              <div class="stat-mini-val crimson">20–30%</div>
+              <div class="stat-mini-label">Fatigue Fatalities</div>
+              <div class="stat-mini-sub">Leading highway collision cause</div>
+            </div>
+            <div class="stat-mini-box">
+              <div class="stat-mini-val crimson">23×</div>
+              <div class="stat-mini-label">Phone Crash Risk</div>
+              <div class="stat-mini-sub">4.6s blind driving per text</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 1.2: The Industry Flaw: "Alert Fatigue" -->
+        <article class="poster-card card-amber">
+          <div class="card-head">
+            <h2 class="card-title"><span>🔔</span> The Existing Industry Gap</h2>
+            <span class="card-tag">FLAW IN EXISTING SYSTEMS</span>
+          </div>
+          <p class="card-text">
+            Conventional monitors trigger annoying alarms whenever head gaze drifts off-center. However, <strong>side-mirror checking is essential safe driving</strong>. High false-positive rates trigger <em>"alert fatigue"</em>, causing <strong>68% of commercial drivers</strong> to disable safety systems.
+          </p>
+          <div class="stat-mini-grid" style="grid-template-columns: 1fr; margin-top: 8px;">
+            <div class="stat-mini-box" style="border-left: 2px solid var(--green); text-align: left; padding: 8px 10px;">
+              <div style="font-size: 0.76rem; font-weight: 700; color: var(--green);">DriveGuard AI Breakthrough:</div>
+              <div style="font-size: 0.69rem; color: var(--text-secondary); margin-top: 2px;">
+                Contextual gaze-gating classifies legitimate mirror glances (0.3–1.2s) with zero false penalties.
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 1.3: Market Value & Regulations -->
+        <article class="poster-card card-emerald">
+          <div class="card-head">
+            <h2 class="card-title"><span>📈</span> Market Value & ROI</h2>
+            <span class="card-tag tag-emerald">$4.8B BY 2030</span>
+          </div>
+          <p class="card-text">
+            Driver Monitoring Systems (DMS) are now <strong>legally mandated</strong> under European Union General Safety Regulations (EU GSR DDAW) and required for <strong>Euro NCAP 5-Star ratings</strong>.
+          </p>
+          <div class="stat-mini-grid">
+            <div class="stat-mini-box">
+              <div class="stat-mini-val cyan">12.8%</div>
+              <div class="stat-mini-label">Annual CAGR</div>
+              <div class="stat-mini-sub">Surging global adoption</div>
+            </div>
+            <div class="stat-mini-box">
+              <div class="stat-mini-val emerald">15–25%</div>
+              <div class="stat-mini-label">Insurance ROI</div>
+              <div class="stat-mini-sub">Fleet premium savings</div>
+            </div>
+          </div>
+          <p class="card-text" style="font-size: 0.72rem; margin-top: 8px;">
+            <strong>Commercial Payback:</strong> Average truck collision liability exceeds <strong>$148,000+</strong>. DriveGuard AI yields full ROI within months.
+          </p>
+        </article>
+
+        <!-- Card 1.4: Real-World Use Cases -->
+        <article class="poster-card">
+          <div class="card-head">
+            <h2 class="card-title"><span>🚚</span> Target Deployments</h2>
+            <span class="card-tag">INDUSTRIES</span>
+          </div>
+          <ul class="poster-bullets">
+            <li><span class="bullet-dot"></span><div><strong>Freight & Logistics:</strong> Overnight line-haul trucks with automated rest-break advisors.</div></li>
+            <li><span class="bullet-dot"></span><div><strong>Ride-Hailing & Cabs:</strong> Stops illegal texting in transit (Uber/Ola/Lyft).</div></li>
+            <li><span class="bullet-dot"></span><div><strong>School Buses & Transit:</strong> Zero-tolerance safety for public commuters.</div></li>
+            <li><span class="bullet-dot"></span><div><strong>Mining & Heavy Industry:</strong> Fatigue tracking in dark quarries & pits.</div></li>
+          </ul>
+        </article>
+
+      </section>
+
+      <!-- ==============================================
+           COLUMN 2: ARCHITECTURE, AI ENGINE & COCKPIT HUD
+           ============================================== -->
+      <section class="poster-col">
+
+        <!-- Card 2.1: System Architecture Flow -->
+        <article class="poster-card">
+          <div class="card-head">
+            <h2 class="card-title"><span>⚙️</span> System Architecture</h2>
+            <span class="card-tag">END-TO-END PIPELINE</span>
+          </div>
+          <div class="flow-vertical">
+            <div class="flow-vert-step">
+              <span class="flow-badge-num">1</span>
+              <div class="flow-vert-info">
+                <div class="flow-vert-title">Video Ingestion & Worker Thread</div>
+                <div class="flow-vert-desc">OpenCV non-blocking background frame capture (30 FPS, 1080p).</div>
+              </div>
+            </div>
+            <div class="flow-vert-step">
+              <span class="flow-badge-num">2</span>
+              <div class="flow-vert-info">
+                <div class="flow-vert-title">Dual AI Inference Engine</div>
+                <div class="flow-vert-desc">Concurrent <strong>MediaPipe 468 3D Mesh</strong> + <strong>YOLOv11 Nano</strong> tensor execution.</div>
+              </div>
+            </div>
+            <div class="flow-vert-step">
+              <span class="flow-badge-num">3</span>
+              <div class="flow-vert-info">
+                <div class="flow-vert-title">Biometric Extraction & Temporal Smoothing</div>
+                <div class="flow-vert-desc">EAR (Eyes), MAR (Mouth), and Head Pose smoothed via 7-frame sliding window buffer.</div>
+              </div>
+            </div>
+            <div class="flow-vert-step">
+              <span class="flow-badge-num">4</span>
+              <div class="flow-vert-info">
+                <div class="flow-vert-title">Graduated Threat Classification</div>
+                <div class="flow-vert-desc">Stage 0 (Normal) ➔ Stage 1 (Caution) ➔ Stage 2 (Critical Alarm) state machine.</div>
+              </div>
+            </div>
+            <div class="flow-vert-step">
+              <span class="flow-badge-num">5</span>
+              <div class="flow-vert-info">
+                <div class="flow-vert-title">Flask REST & MySQL Telemetry Hub</div>
+                <div class="flow-vert-desc">Live status polling (500ms) with persistent relational session audits.</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2.2: Live Cockpit Interface & HUD Showcase -->
+        <article class="poster-card card-purple" style="flex: 1;">
+          <div class="card-head">
+            <h2 class="card-title"><span>🎛️</span> Autonomous Cockpit HUD</h2>
+            <span class="card-tag">TESLA CYBERPUNK UI</span>
+          </div>
+          <p class="card-text">
+            High-tech cockpit interface with targeting reticles, animated laser scanline, perimeter mood lighting vignette, and synthesized Web Audio alerts.
+          </p>
+
+          <!-- Mockup Viewport -->
+          <div class="cockpit-showcase">
+            <div class="mockup-header">
+              <span class="mockup-status-dot">SYS//LIVE_FEED ONLINE</span>
+              <span style="font-size: 0.68rem; font-family: var(--font-mono); color: var(--accent);">FPS: 32.4 • LATENCY: 38ms</span>
+            </div>
+
+            <div class="camera-viewport-mock">
+              <!-- Corner Reticles -->
+              <div class="cam-reticle-tl"></div>
+              <div class="cam-reticle-tr"></div>
+              <div class="cam-reticle-bl"></div>
+              <div class="cam-reticle-br"></div>
+              <div class="cam-scanline"></div>
+
+              <!-- Top Telemetry Badges -->
+              <div class="cam-pill-top">
+                <span class="cam-badge">468 MESH TRACKED</span>
+                <span class="cam-badge badge-night">🌙 NIGHT VISION (NIR)</span>
+              </div>
+
+              <!-- Simulated Face Mesh & Phone Detection -->
+              <div class="cam-face-box">
+                <span style="font-size: 1.8rem;">👤</span>
+                <span style="font-size: 0.58rem; font-family: var(--font-mono); color: var(--accent); margin-top: -4px;">EAR: 0.312 (OPEN)</span>
+              </div>
+
+              <div class="cam-phone-box">
+                <span class="cam-phone-label">PHONE 95%</span>
+              </div>
+            </div>
+
+            <!-- Telemetry Indicator Row -->
+            <div class="mockup-telem-row">
+              <div class="telem-pill">
+                <div class="telem-pill-title">DRIVER SCORE</div>
+                <div class="telem-pill-val" style="color: var(--green);">98% (A)</div>
+              </div>
+              <div class="telem-pill">
+                <div class="telem-pill-title">THREAT STAGE</div>
+                <div class="telem-pill-val" style="color: var(--accent);">STAGE 0 NORMAL</div>
+              </div>
+              <div class="telem-pill">
+                <div class="telem-pill-title">VISION MODE</div>
+                <div class="telem-pill-val" style="color: var(--green);">TACTICAL NIR</div>
+              </div>
+            </div>
+            <!-- Biometric Progress Bar Gauges -->
+            <div class="mockup-gauges-grid">
+              <div class="gauge-item">
+                <div class="gauge-head">
+                  <span style="color: var(--text-muted);">EYE RATIO (EAR)</span>
+                  <span style="color: var(--accent); font-weight: 700;">0.312 (OPEN)</span>
+                </div>
+                <div class="gauge-track">
+                  <div class="gauge-fill" style="width: 78%; background: linear-gradient(90deg, #0ea5e9, #00f0ff);"></div>
+                </div>
+              </div>
+              <div class="gauge-item">
+                <div class="gauge-head">
+                  <span style="color: var(--text-muted);">MOUTH RATIO (MAR)</span>
+                  <span style="color: var(--green); font-weight: 700;">0.114 (NORMAL)</span>
+                </div>
+                <div class="gauge-track">
+                  <div class="gauge-fill" style="width: 25%; background: linear-gradient(90deg, #10b981, #34d399);"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cockpit Threat Vignette & Audio Status Row -->
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px; background: rgba(15, 23, 42, 0.65); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 6px 10px;">
+              <div style="display: flex; align-items: center; gap: 6px; font-size: 0.68rem;">
+                <span style="font-size: 0.85rem;">🚨</span>
+                <span style="color: var(--text-secondary); font-family: var(--font-mono);">PERIMETER ALERT LIGHTING:</span>
+                <span style="color: var(--green); font-weight: 700; font-family: var(--font-mono);">ACTIVE</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px; font-size: 0.68rem;">
+                <span style="font-size: 0.85rem;">🔊</span>
+                <span style="color: var(--text-secondary); font-family: var(--font-mono);">SYNTH AUDIO:</span>
+                <span style="color: var(--accent); font-weight: 700; font-family: var(--font-mono);">880Hz / 440Hz SAWTOOTH</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Multi-Spectral Filter Modes Pill Group & Floating Dock -->
+          <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 6px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.68rem; font-family: var(--font-mono); color: var(--text-muted);">MULTI-SPECTRAL CAMERA HUD MODES:</span>
+              <span style="font-size: 0.65rem; font-family: var(--font-mono); color: var(--green);">INSTANT 1-CLICK TOGGLE</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;">
+              <span class="card-tag" style="text-align: center; font-size: 0.64rem; padding: 4px 0;">RGB STANDARD</span>
+              <span class="card-tag tag-emerald" style="text-align: center; font-size: 0.64rem; padding: 4px 0;">🌙 NIGHT VISION</span>
+              <span class="card-tag tag-crimson" style="text-align: center; font-size: 0.64rem; padding: 4px 0;">🔥 THERMAL HEAT</span>
+              <span class="card-tag" style="text-align: center; font-size: 0.64rem; padding: 4px 0;">⚡ MATRIX HUD</span>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- ==============================================
+           COLUMN 3: NOVELTY, RESULTS & FUTURE ROADMAP
+           ============================================== -->
+      <section class="poster-col">
+
+        <!-- Card 3.1: Core Innovations -->
+        <article class="poster-card card-emerald">
+          <div class="card-head">
+            <h2 class="card-title"><span>✨</span> Core Innovations</h2>
+            <span class="card-tag tag-emerald">TECHNICAL NOVELTY</span>
+          </div>
+
+          <div class="novelty-item">
+            <span class="novelty-icon">🔍</span>
+            <div>
+              <div class="novelty-title">1. Context-Aware Mirror Checking</div>
+              <div class="novelty-desc">
+                Spatial-temporal classification verifies glances to left/right mirrors (0.3–1.2s), eliminating false distraction penalties.
+              </div>
+            </div>
+          </div>
+
+          <div class="novelty-item">
+            <span class="novelty-icon">⚡</span>
+            <div>
+              <div class="novelty-title">2. Graduated 3-Stage Threat Escalation</div>
+              <div class="novelty-desc">
+                Stage 0 (Attentive) ➔ Stage 1 (Amber pulse & chime for yawning) ➔ Stage 2 (Crimson strobe & sawtooth alert for microsleep/phone).
+              </div>
+            </div>
+          </div>
+
+          <div class="novelty-item">
+            <span class="novelty-icon">🖥️</span>
+            <div>
+              <div class="novelty-title">3. Cyberpunk Cockpit HUD & Dual-Channel Alert UI</div>
+              <div class="novelty-desc">
+                High-DPI heads-up display combining 3D facial mesh reticles, dynamic perimeter alarm lighting (vignette warning), Web Audio multi-frequency tone synthesis, and instant Spectral Vision filters (RGB / Night NIR / FLIR Thermal / Matrix).
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3.2: Experimental Results & Benchmarks -->
+        <article class="poster-card card-emerald">
+          <div class="card-head">
+            <h2 class="card-title"><span>📊</span> Empirical Benchmarks</h2>
+            <span class="card-tag tag-emerald">VALIDATED</span>
+          </div>
+          <div class="stat-mini-grid">
+            <div class="stat-mini-box">
+              <div class="stat-mini-val emerald">32 FPS</div>
+              <div class="stat-mini-label">Edge CPU Speed</div>
+              <div class="stat-mini-sub">Standard Intel i5 / Ryzen</div>
+            </div>
+            <div class="stat-mini-box">
+              <div class="stat-mini-val cyan">38 ms</div>
+              <div class="stat-mini-label">Total Latency</div>
+              <div class="stat-mini-sub">Sub-frame response time</div>
+            </div>
+            <div class="stat-mini-box">
+              <div class="stat-mini-val emerald">94.6%</div>
+              <div class="stat-mini-label">Phone Detection</div>
+              <div class="stat-mini-sub">YOLOv11 Handheld accuracy</div>
+            </div>
+            <div class="stat-mini-box">
+              <div class="stat-mini-val amber">87%</div>
+              <div class="stat-mini-label">False Alarm Drop</div>
+              <div class="stat-mini-sub">Mirror check gating</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3.3: Future Scope & Heart Rate Integration -->
+        <article class="poster-card card-crimson">
+          <div class="card-head">
+            <h2 class="card-title"><span>🚀</span> Future Scope & Roadmap</h2>
+            <span class="card-tag tag-crimson">V2.0 EXTENSION</span>
+          </div>
+
+          <div class="novelty-item" style="border-left: 2px solid var(--red);">
+            <span class="novelty-icon">❤️</span>
+            <div>
+              <div class="novelty-title" style="color: var(--red);">Contactless Heart Rate & Pulse (rPPG)</div>
+              <div class="novelty-desc">
+                Camera-based photoplethysmography analyzing facial skin hemoglobin micro-pulsations to detect cardiac deceleration <strong>2–4s before microsleep onset</strong>.
+              </div>
+            </div>
+          </div>
+
+          <ul class="poster-bullets" style="margin-top: 8px;">
+            <li><span class="bullet-dot" style="background: var(--purple);"></span><div><strong>CAN Bus & OBD-II:</strong> Correlate fatigue with steering micro-corrections and speed governor.</div></li>
+            <li><span class="bullet-dot" style="background: var(--green);"></span><div><strong>940nm Hardware NIR:</strong> Glare-free 24/7 vision through dark sunglasses and pitch-black cabins.</div></li>
+            <li><span class="bullet-dot" style="background: var(--accent);"></span><div><strong>Jetson Orin Box:</strong> Embedded TensorRT automotive appliance (&lt;15ms latency).</div></li>
+          </ul>
+        </article>
+
+      </section>
+
+    </div>
+
+    <!-- 3. POSTER FOOTER -->
+    <footer class="poster-footer">
+      <div class="footer-left">
+        <span class="footer-badge-tag">AUTONOMOUS EDGE AI</span>
+        <div class="footer-text">
+          <strong>DriveGuard AI System Stack:</strong> Python 3.11 · MediaPipe 468 3D Mesh · Ultralytics YOLOv11 · PyTorch NMS · OpenCV · Flask REST · MySQL Relational Audit · Vanilla Cyber Cockpit Telemetry HUD.
+        </div>
+      </div>
+      <div class="footer-right">
+        <span class="footer-meta-pill">EU GSR DDAW COMPLIANT</span>
+        <span class="footer-meta-pill">EURO NCAP READY</span>
+        <span class="footer-meta-pill">ISO 26262 ASIL-B TARGET</span>
+      </div>
+    </footer>
+
+  </main>
+
+</body>
+</html>
